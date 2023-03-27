@@ -15,9 +15,9 @@
     "name": "Demo Pipeline",
     "awsEcsCluster": "Demo-Cluster-AX8J34",
     "awsEcsClusterStaging": "Demo-StagingCluster-kD5hKe3",
-    "githubClientId": "08f3uab4",
-    "githubClientSecret": "7d3ri56da",
-    "githubOauthToken": "b3d98a3",
+    "githubClientId": "83b3ac48a100cc6fb320",
+    "githubClientSecret": "a43abd98aa3a2b3332add3a12ac4ba3e02cba48b",
+    "githubOauthToken": "a233ccd19afbdc6bb380",
     "services": []
   }
 ]
@@ -39,9 +39,9 @@
   "name": "Demo Pipeline",
   "awsEcsCluster": "Demo-Cluster-AX8J34",
   "awsEcsClusterStaging": "Demo-StagingCluster-kD5hKe3",
-  "githubClientId": "08f3uab4",
-  "githubClientSecret": "7d3ri56da",
-  "githubOauthToken": "b3d98a3",
+  "githubClientId": "83b3ac48a100cc6fb320",
+  "githubClientSecret": "a43abd98aa3a2b3332add3a12ac4ba3e02cba48b",
+  "githubOauthToken": "a233ccd19afbdc6bb380",
   "services": []
 }
 ```
@@ -63,9 +63,9 @@
   "name": "Demo Pipeline Two",
   "awsEcsCluster": "Demo-Cluster-Two-BCA8HT",
   "awsEcsClusterStaging": "Demo-StagingCluster-Two-4k8ca45",
-  "githubClientId": "j83jdz",
-  "githubClientSecret": "e3nm95",
-  "githubOauthToken": "b3dhyd"
+  "githubClientId": "83b3ac48a100cc6fb320",
+  "githubClientSecret": "a43abd98aa3a2b3332add3a12ac4ba3e02cba48b",
+  "githubOauthToken": "a233ccd19afbdc6bb380"
 }
 ```
 
@@ -79,9 +79,9 @@
   "name": "Demo Pipeline Two",
   "awsEcsCluster": "Demo-Cluster-Two-BCA8HT",
   "awsEcsClusterStaging": "Demo-StagingCluster-Two-4k8ca45",
-  "githubClientId": "j83jdz",
-  "githubClientSecret": "e3nm95",
-  "githubOauthToken": "b3dhyd"
+  "githubClientId": "83b3ac48a100cc6fb320",
+  "githubClientSecret": "a43abd98aa3a2b3332add3a12ac4ba3e02cba48b",
+  "githubOauthToken": "a233ccd19afbdc6bb380"
 }
 ```
 
