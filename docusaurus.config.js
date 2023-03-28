@@ -80,6 +80,12 @@ const config = {
             label: 'Case Study',
           },
           {
+            type: 'docSidebar',
+            sidebarId: 'sidebar2',
+            position: 'right',
+            label: 'API',
+          },
+          {
             href: 'https://github.com/seamless-cicd',
             label: 'GitHub',
             position: 'right',
