@@ -19,10 +19,23 @@ const sidebars = {
   // But you can create a sidebar manually
 
   sidebar: [
-    'intro', 'stages-of-deployment-pipeline', 'evolution-of-deployment-strategies'
+    'intro',
+    'stages-of-deployment-pipeline',
+    'evolution-of-deployment-strategies',
+    'cicd-in-practice',
+    'cicd-for-microservices',
+    'building-a-cicd-pipeline',
+    'existing-solutions',
+    'introducing-seamless',
+    'building-core-functionality',
+    'expanding-feature-set',
+    'final-architecture',
+    'the-team',
+    'markdown-features',
   ],
   sidebar2: [
-    'pipelines'
+    'pipelines',
+    'services',
   ]
 
 };
