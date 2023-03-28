@@ -36,8 +36,8 @@ const sidebars = {
   sidebar2: [
     'pipelines',
     'services',
+    'runs',
   ]
-
 };
 
 module.exports = sidebars;
