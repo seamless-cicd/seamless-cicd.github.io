@@ -37,6 +37,7 @@ const sidebars = {
     'pipelines',
     'services',
     'runs',
+    'stages',
   ]
 };
 
