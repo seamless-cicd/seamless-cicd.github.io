@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Seamless',
   tagline: 'CI/CD Pipeline for Containerized Microservices',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/seamless.png',
 
   // Set the production url of your site here
   url: 'https://seamless-cicd.github.io',
