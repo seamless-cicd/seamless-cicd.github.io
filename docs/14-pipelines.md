@@ -1,8 +1,8 @@
 # Pipelines
 
-**Method:** GET
+**Method:** `GET`
 
-**Route:** api/pipelines
+**Route:** `api/pipelines`
 
 **Response Body:**
 
@@ -25,9 +25,9 @@
 
 ---
 
-**Method:** GET
+**Method:** `GET`
 
-**Route:** api/pipelines/:pipelineId
+**Route:** `api/pipelines/:pipelineId`
 
 **Response Body:**
 
@@ -48,9 +48,9 @@
 
 ---
 
-**Method:** POST
+**Method:** `POST`
 
-**Route:** api/pipelines
+**Route:** `api/pipelines`
 
 **Headers:**
 
@@ -87,9 +87,9 @@
 
 ---
 
-**Method:** DELETE
+**Method:** `DELETE`
 
-**Route:** api/pipelines/:pipelineId
+**Route:** `api/pipelines/:pipelineId`
 
 **Response Body:**
 
