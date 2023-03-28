@@ -70,7 +70,7 @@
 
 **Route:** `api/services`
 
-**Headers:**
+**Request Headers:**
 
 - Content-Type: application/json
 
@@ -160,7 +160,7 @@
 
 **Route:** `api/services/:serviceId`
 
-**Headers:**
+**Request Headers:**
 
 - Content-Type: application/json
 

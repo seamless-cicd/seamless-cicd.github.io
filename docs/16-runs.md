@@ -56,7 +56,7 @@
 
 **Route:** `api/runs/:runId`
 
-**Headers:**
+**Request Headers:**
 
 - Content-Type: application/json
 

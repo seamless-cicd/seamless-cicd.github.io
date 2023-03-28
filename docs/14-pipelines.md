@@ -52,7 +52,7 @@
 
 **Route:** `api/pipelines`
 
-**Headers:**
+**Request Headers:**
 
 - Content-Type: application/json
 
