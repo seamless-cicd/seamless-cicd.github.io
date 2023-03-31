@@ -39,13 +39,13 @@ By defining deployment steps as part of a partially or fully automated pipeline,
 
 ### 2.3 Automated Deployments Improve Speed and Reliability
 
-When a deployment process evolves from manual execution of scripts to an automated series of interconnected steps, it becomes known as a deployment pipeline. CI/CD (continuous integration and continuous delivery) is a methodology that embraces such automation. CI/CD pipelines provide superior guarantees that the deployment steps will be executed in a consistent and repeatable way, resulting in faster and more reliable deployments. 
+When a deployment process evolves from manual execution of scripts to an automated series of interconnected steps, it becomes known as a **deployment pipeline**. CI/CD (continuous integration and continuous delivery) is a methodology that embraces such automation. CI/CD pipelines provide superior guarantees that the deployment steps will be executed in a consistent and repeatable way, resulting in faster and more reliable deployments. 
 
 Automated deployments treat version control systems as more than just code storage solutions. Version control systems plug directly into deployment pipelines. Since version control systems are notified when developers make a commit, they can automatically trigger whatever automated system is responsible for deploying the code, which will carry out the deployment process. This eliminates delay between deployment requests and pipeline initiation. This is in stark contrast to manual deployments, where such delays are common.
 
 ![Manual vs automatic deployment](/img/case-study/manual-vs-automatic-deployment.svg)
 
-Choosing to fully automate deployments all the way through production can drastically shorten the time between release cycles, improving the rate at which QA and customers can provide feedback. For example, once TrueCar switched from a waterfall-style approach to a fully automated pipeline, they transitioned from a “burdensome weekly release cycle to deploying code up to 100 times per week”.
+Choosing to *fully* automate deployments all the way through production can drastically shorten the time between release cycles, improving the rate at which QA and customers can provide feedback. For example, once TrueCar switched from a waterfall-style approach to a fully automated pipeline, they transitioned from a “burdensome weekly release cycle to deploying code up to 100 times per week”.
 
 Automated deployments provide greater reliability by significantly reducing the possibility of human error. An automated pipeline is less prone to mistakes as it executes commands automatically, eliminating the need for human intervention.Quality checks, such as linting and testing, are integrated directly into the pipelines to ensure they are consistently performed with every deployment. Automated testing plays a crucial role in identifying bugs early on, allowing for incremental fixes to be made and preventing issues from accumulating.
 
@@ -55,10 +55,10 @@ Automated deployments provide greater reliability by significantly reducing the 
 
 A deployment pipeline is essential for delivering code changes from development to production. Although there is no one-size-fits-all pipeline, the steps typically fall under one of the following four stages:
 
-1. The Source stage connects the pipeline to a repository hosting platform such as GitHub. Specified triggers such as opening a pull request or merging into main will initiate the pipeline.
-2. The Testing stage executes tests against the updated application to ensure code quality and verify that the code functions as expected. Standard forms of testing include static code analysis, unit testing, and integration testing. Static code analysis checks for stylistic issues and basic programmatic vulnerabilities; tools include ESLint and RuboCop. Unit testing verifies the functionality of code components individually; tools include Jest and RSpec. Integration testing confirms proper interactions between application components; tools include Cypress and Selenium.
-3. The Build stage bundles the updated source code with its dependencies and compiles this into a single deployable artifact; tools include Webpack and Docker.
-4. The Deployment stage deploys the built artifact to one or more environments. Typically, this includes a Staging (Pre-Production) environment used by QA teams to review the application and give approval, as well as a Production environment that is accessible to end users and represents the final outcome of the deployment process. Examples of deployment destinations are Amazon Web Services (AWS) Fargate and Google Cloud Run.
+1. The **Source stage** connects the pipeline to a repository hosting platform such as GitHub. Specified triggers such as opening a pull request or merging into main will initiate the pipeline.
+2. The **Testing stage** executes tests against the updated application to ensure code quality and verify that the code functions as expected. Standard forms of testing include static code analysis, unit testing, and integration testing. Static code analysis checks for stylistic issues and basic programmatic vulnerabilities; tools include ESLint and RuboCop. Unit testing verifies the functionality of code components individually; tools include Jest and RSpec. Integration testing confirms proper interactions between application components; tools include Cypress and Selenium.
+3. The **Build stage** bundles the updated source code with its dependencies and compiles this into a single deployable artifact; tools include Webpack and Docker.
+4. The **Deployment stage** deploys the built artifact to one or more environments. Typically, this includes a Staging (Pre-Production) environment used by QA teams to review the application and give approval, as well as a Production environment that is accessible to end users and represents the final outcome of the deployment process. Examples of deployment destinations are Amazon Web Services (AWS) Fargate and Google Cloud Run.
 
 ![Stages](/img/case-study/stages.svg)
 
@@ -80,15 +80,15 @@ Introducing automation can result in an inevitable tradeoff. While faster code d
 
 Teams can make a number of CI/CD-related decisions to fine-tune the location of their deployment pipeline on this safety-velocity spectrum.
 
-1. Branching Strategy: Traditional feature branching workflows such as GitHub Flow prioritize safety by reducing the risk of bad code being pushed to main. In contrast, trunk-based development prioritizes speed by encouraging direct commits to main.
+1. **Branching Strategy:** Traditional feature branching workflows such as GitHub Flow prioritize safety by reducing the risk of bad code being pushed to main. In contrast, trunk-based development prioritizes speed by encouraging direct commits to main.
 
 ![Branching strategies](/img/case-study/branching-strategies.svg)
 
-2. Merging Strategy: Teams that adopt a feature branching workflow can automatically merge pull requests if tests pass or require a team member to manually perform the merge. While auto-merging can speed up the pipeline, it may lead to merging code that has not been adequately tested and reviewed if the auto-merge criteria are not carefully selected.
+2. **Merging Strategy:** Teams that adopt a feature branching workflow can automatically merge pull requests if tests pass or require a team member to manually perform the merge. While auto-merging can speed up the pipeline, it may lead to merging code that has not been adequately tested and reviewed if the auto-merge criteria are not carefully selected.
 
 ![Auto merge](/img/case-study/auto-merge.svg)
 
-3. Continuous Deployment: Once code passes tests and is packaged into a build artifact, the pipeline deploys it straight to production without first using a pre-production environment. This enables teams to deliver the product to end users faster.
+3. **Continuous Deployment:** Once code passes tests and is packaged into a build artifact, the pipeline deploys it straight to production without first using a pre-production environment. This enables teams to deliver the product to end users faster.
 
 CI/CD tools can be configured to address the challenge of balancing safety and velocity. However, new challenges arise when CI/CD pipelines are used for different application architectures such as monoliths and microservices.
 
