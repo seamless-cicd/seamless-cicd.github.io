@@ -61,10 +61,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 2,
+      },
       navbar: {
-        // title: 'Seamless',
         hideOnScroll: true,
         logo: {
           alt: 'Seamless CI/CD',
@@ -74,14 +75,14 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'sidebar',
+            type: 'doc',
             position: 'right',
+            docId: 'case-study',
             label: 'Case Study',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'sidebar2',
+            sidebarId: 'apiDocsSidebar',
             position: 'right',
             label: 'API',
           },
