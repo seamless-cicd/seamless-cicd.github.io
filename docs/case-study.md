@@ -10,7 +10,7 @@ Software engineering teams strive to integrate and deliver code changes quickly 
 
 Microservice architectures, however, present unique testing and deployment challenges. Unlike a single application with a single deployment pipeline, microservice architectures use individual deployment pipelines for individual services. Additionally, microservices must function properly within the context of the entire system before they are deployed to production. Adequate testing must be implemented to address these complexities.
 
-This case study describes how we built Seamless, a self-hosted, open-source, cloud-native CI/CD solution tailored for microservices. Seamless offers a low-configuration platform for automating the testing, building, and deployment of containerized microservice applications.
+This case study describes how we built **Seamless**, a self-hosted, open-source, cloud-native CI/CD solution tailored for microservices. Seamless offers a low-configuration platform for automating the testing, building, and deployment of containerized microservice applications.
 
 ## 2. Evolution of Deployment Processes
 
