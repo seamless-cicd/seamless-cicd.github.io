@@ -1,32 +1,23 @@
 # Pipelines
 
 <div className="mb-2">
-  <span className="font-bold text-indigo-600">Method: </span>
-  <span className="font-extrabold text-stone-500">
-    GET
-  </span>
-</div> 
-
-<div className="mb-2">
-  <span className="font-bold text-indigo-600">Route: </span>
+  <span className="font-extrabold text-stone-500 text-2xl">GET: </span>
   <code className="text-indigo-400">
     api/pipelines
   </code>
-</div>
+</div> 
 
 <div className="mb-2">
-  <span className="font-bold text-indigo-600">Status: </span>
-  <span className="text-green-600">
-    200 OK
+  <span className="font-extrabold text-stone-500">List all pipelines</span> 
+  <br />
+  <span className="text-stone-600">
+    This endpoint allows you to retireve a list of all pipelines.
   </span>
 </div>
 
-<div className="mb-2">
-  <span className="font-bold text-indigo-600">
-    Response Body:
-  </span>
+<div className="font-extrabold text-stone-500 mb-2">
+  Response Body
 </div>
-
 
 ```json
 [
@@ -47,11 +38,24 @@
 
 ---
 
-**Method:** `GET`
+<div className="mb-2">
+  <span className="font-extrabold text-stone-500 text-2xl">GET: </span>
+  <code className="text-indigo-400">
+    api/pipelines/:pipelineId
+  </code>
+</div> 
 
-**Route:** `api/pipelines/:pipelineId`
+<div className="mb-2">
+  <span className="font-extrabold text-stone-500">List a pipeline</span> 
+  <br />
+  <span className="text-stone-600">
+    This endpoint allows you to retireve a single pipeline using the its id.
+  </span>
+</div>
 
-**Response Body:**
+<div className="font-extrabold text-stone-500 mb-2">
+  Response Body
+</div>
 
 ```json
 {
@@ -70,34 +74,31 @@
 
 ---
 
-<div className="mb-2">
-  <span className="font-bold text-indigo-600">Method: </span>
-  <span className="font-extrabold text-stone-500">
-    POST
-  </span>
-</div> 
 
 <div className="mb-2">
-  <span className="font-bold text-indigo-600">Route: </span>
+  <span className="font-extrabold text-stone-500 text-2xl">POST </span>
   <code className="text-indigo-400">
     api/pipelines
   </code>
 </div>
 
 <div className="mb-2">
-  <span className="font-bold text-indigo-600">
-    Request Headers:
+  <span className="font-extrabold text-stone-500">Create a pipeline</span> 
+  <br />
+  <span className="text-stone-600">
+    This endpoint allows you to add a new pipeline to the pipeline list. Properites shown in the request body are required.
   </span>
 </div>
 
-<ul className="list-disc">
-  <li className="text-stone-500">Content-Type: application/json</li>
-</ul>
-
 <div className="mb-2">
-  <span className="font-bold text-indigo-600">
-    Request Body:
-  </span>
+  <span className="font-extrabold text-stone-500">Request Headers </span>
+  <code className="text-indigo-400">
+    Content-Type: application/json
+  </code>
+</div>
+
+<div className="font-extrabold text-stone-500 mb-2">
+  Request Body
 </div>
 
 ```json
@@ -111,17 +112,8 @@
 }
 ```
 
-<div className="mb-2">
-  <span className="font-bold text-indigo-600">Status: </span>
-  <span className="text-green-600">
-    200 OK
-  </span>
-</div>
-
-<div className="mb-2">
-  <span className="font-bold text-indigo-600">
-    Response Body:
-  </span>
+<div className="font-extrabold text-stone-500 mb-2">
+  Response Body
 </div>
 
 
@@ -141,11 +133,24 @@
 
 ---
 
-**Method:** `DELETE`
+<div className="mb-2">
+  <span className="font-extrabold text-stone-500 text-2xl">DELETE: </span>
+  <code className="text-indigo-400">
+    api/pipelines/:pipelineId
+  </code>
+</div> 
 
-**Route:** `api/pipelines/:pipelineId`
+<div className="mb-2">
+  <span className="font-extrabold text-stone-500">Delete a pipeline</span> 
+  <br />
+  <span className="text-stone-600">
+    This endpoint allows you to delete a pipeline by using its id.
+  </span>
+</div>
 
-**Response Body:**
+<div className="font-extrabold text-stone-500 mb-2">
+  Response Body
+</div>
 
 ```json
 {}
