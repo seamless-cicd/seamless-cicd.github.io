@@ -36,7 +36,7 @@
 
 **Method:** `GET`
 
-**Route:** `api/services/serviceId`
+**Route:** `api/services/:serviceId`
 
 **Response Body:**
 

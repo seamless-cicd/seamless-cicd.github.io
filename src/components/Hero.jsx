@@ -33,7 +33,7 @@ export default function Hero() {
       </h2>
       <div className="mt-6">
         <Link to="/case-study">
-          <button className="group flex cursor-pointer items-center gap-x-1 rounded-full border-none bg-indigo-800 px-5 py-2 font-display text-base font-semibold text-white transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:scale-95 active:bg-indigo-900">
+          <button className="group flex cursor-pointer items-center gap-x-1 rounded-full border-none bg-indigo-800 px-5 py-2.5 font-display text-base font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:scale-95 active:bg-indigo-900">
             Read Case Study
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ export default function Hero() {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             >
               <line x1="7" y1="17" x2="17" y2="7"></line>
               <polyline points="7 7 17 7 17 17"></polyline>

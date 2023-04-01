@@ -14,33 +14,36 @@ export default function Navbar() {
           <Logo className="w-[170px]" role="img" />
         </div>
         <div className="col-span-6 flex items-center justify-center sm:col-span-8">
-          <ul className="my-0 mx-auto flex list-none gap-x-12 rounded-full border border-solid border-stone-300 px-12 py-1.5 text-sm font-medium">
+          <ul className="my-0 mx-auto flex list-none gap-x-12 rounded-full border border-solid border-stone-300 px-12 py-1.5 text-sm font-semibold shadow-sm">
             <Link
-              className="text-stone-800 hover:no-underline"
+              className="text-stone-700 hover:no-underline"
               to="/case-study"
             >
               Case Study
             </Link>
             <Link
-              className="text-stone-800 hover:no-underline"
+              className="text-stone-700 hover:no-underline"
               to="/presentation"
             >
               Presentation
             </Link>
             <Link
-              className="text-stone-800 hover:no-underline"
+              className="text-stone-700 hover:no-underline"
               to="/api/pipelines"
             >
               API Docs
             </Link>
-            <Link className="text-stone-800 hover:no-underline" to="/the-team">
+            <Link className="text-stone-700 hover:no-underline" to="/the-team">
               The Team
             </Link>
           </ul>
         </div>
         <div className="col-span-3 flex justify-end sm:col-span-2">
           <a href="https://github.com/seamless-cicd" target="_blank">
-            <GitHubLogo className="block w-[50px]" role="img" />
+            <GitHubLogo
+              className="block w-[50px] transition-transform hover:scale-110"
+              role="img"
+            />
           </a>
         </div>
       </nav>
