@@ -20,7 +20,7 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'seamless-cicd', // Usually your GitHub org/user name.
   projectName: 'seamless-cicd.github.io', // Usually your repo name.
-  // deploymentBranch: 'gh-pages',
+  deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
