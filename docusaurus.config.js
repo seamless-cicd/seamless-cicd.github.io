@@ -81,6 +81,18 @@ const config = {
             label: 'Case Study',
           },
           {
+            type: 'doc',
+            position: 'right',
+            docId: 'presentation',
+            label: 'Presentation',
+          },
+          {
+            type: 'doc',
+            position: 'right',
+            docId: 'the-team',
+            label: 'The Team',
+          },
+          {
             type: 'docSidebar',
             sidebarId: 'apiDocsSidebar',
             position: 'right',
