@@ -10,8 +10,7 @@ Software engineering teams strive to integrate and deliver code changes quickly 
 
 Microservice architectures, however, present unique testing and deployment challenges. Unlike a single application with a single deployment pipeline, microservice architectures use individual deployment pipelines for individual services. Additionally, microservices must function properly within the context of the entire system before they are deployed to production. Adequate testing must be implemented to address these complexities.
 
-This case study describes how we built **Seamless**, a self-hosted, open-source, cloud-native CI/CD solution tailored for microservices. Seamless offers a low-configuration platform for automating the testing, building, and deployment of containerized microservice applications.
-
+This case study describes how we built Seamless, a self-hosted, open-source, cloud-native CI/CD solution tailored for microservices. Seamless offers a low-configuration platform for automating the testing, building, and deployment of containerized microservice applications.
 
 ## 2. Evolution of Deployment Processes
 
@@ -21,7 +20,7 @@ A deployment process is a sequence of steps for building, testing, and deploying
 
 Version control systems such as Git enable developers to track changes, collaborate, and revert to previous versions of code.[^1] By creating branches, developers can isolate changes and work on new features independently, which are eventually merged into a central branch, commonly referred to as the main or master branch. This branch's code will be deployed to production, and this is where the deployment process kicks in.
 
-While most deployment processes utilize version control systems, the path from version control to deployment can vary significantly, and it can be either manual or automatic. 
+While most deployment processes utilize version control systems, the path from version control to deployment can vary significantly, and it can be either manual or automatic.
 
 ### 2.2 Manual Deployments are Slow and Unreliable
 
@@ -35,17 +34,17 @@ Additionally, manual deployments are error-prone and can lead to unexpected bugs
 
 ![Same app different results](/img/case-study/same-app-different-results.svg)
 
-By defining deployment steps as part of a partially or fully automated pipeline, teams can achieve greater consistency and repeatability, resulting in faster and more reliable deployments. 
+By defining deployment steps as part of a partially or fully automated pipeline, teams can achieve greater consistency and repeatability, resulting in faster and more reliable deployments.
 
 ### 2.3 Automated Deployments Improve Speed and Reliability
 
-When a deployment process evolves from manual execution of scripts to an automated series of interconnected steps, it becomes known as a **deployment pipeline**. CI/CD (continuous integration and continuous delivery) is a methodology that embraces such automation. CI/CD pipelines provide superior guarantees that the deployment steps will be executed in a consistent and repeatable way, resulting in faster and more reliable deployments. 
+When a deployment process evolves from manual execution of scripts to an automated series of interconnected steps, it becomes known as a **deployment pipeline**. CI/CD (continuous integration and continuous delivery) is a methodology that embraces such automation. CI/CD pipelines provide superior guarantees that the deployment steps will be executed in a consistent and repeatable way, resulting in faster and more reliable deployments.
 
 Automated deployments treat version control systems as more than just code storage solutions. Version control systems plug directly into deployment pipelines. Since version control systems are notified when developers make a commit, they can automatically trigger whatever automated system is responsible for deploying the code, which will carry out the deployment process. This eliminates delay between deployment requests and pipeline initiation. This is in stark contrast to manual deployments, where such delays are common.
 
 ![Manual vs automatic deployment](/img/case-study/manual-vs-automatic-deployment.svg)
 
-Choosing to *fully* automate deployments all the way through production can drastically shorten the time between release cycles, improving the rate at which QA and customers can provide feedback. For example, once TrueCar switched from a waterfall-style approach to a fully automated pipeline, they transitioned from a “burdensome weekly release cycle to deploying code up to 100 times per week”.
+Choosing to _fully_ automate deployments all the way through production can drastically shorten the time between release cycles, improving the rate at which QA and customers can provide feedback. For example, once TrueCar switched from a waterfall-style approach to a fully automated pipeline, they transitioned from a “burdensome weekly release cycle to deploying code up to 100 times per week”.
 
 Automated deployments provide greater reliability by significantly reducing the possibility of human error. An automated pipeline is less prone to mistakes as it executes commands automatically, eliminating the need for human intervention.Quality checks, such as linting and testing, are integrated directly into the pipelines to ensure they are consistently performed with every deployment. Automated testing plays a crucial role in identifying bugs early on, allowing for incremental fixes to be made and preventing issues from accumulating.
 
@@ -132,7 +131,7 @@ In order to ease the burden of managing CI/CD for tens or potentially hundreds o
 
 One solution for modularizing CI/CD pipelines across microservices is to reuse the same sequence of steps, known as segments, for different microservice pipelines. These shared segments could come in the form of shell scripts, reusable Docker images, repositories or libraries, or YAML templates containing deployment-related logic.
 
-However, there are some major downsides to this approach. For one, it still requires bootstrapping and maintaining an individual pipeline for each microservice. Secondly, the shared pipeline segments themselves need to be maintained. 
+However, there are some major downsides to this approach. For one, it still requires bootstrapping and maintaining an individual pipeline for each microservice. Secondly, the shared pipeline segments themselves need to be maintained.
 
 ![Shared segments](/img/case-study/shared-segments.svg)
 
@@ -205,6 +204,7 @@ Seamless is an open-source CI/CD pipeline tool designed specifically for contain
 ### 9.1 Setting Up Seamless
 
 Using Seamless requires:
+
 - An AWS account
 - npm installed
 - The AWS CLI installed and configured (Seamless will use the locally configured AWS account)
@@ -217,6 +217,7 @@ To install Seamless, run `npm install -g seamless`. Running `seamless init` will
 The dashboard provides users with the ability to set up their pipeline and manage the associated services. When setting up the pipeline, the user will provide their ECS Cluster information for both production and staging environments. This allows for streamlined management of the pipeline and its services, providing users with a centralized location to manage all aspects of their deployment process.
 
 ### Connecting Services to the Pipeline
+
 The dashboard provides users with the ability to set up their pipeline and manage the associated services. When setting up the pipeline, the user will provide their ECS Cluster information for both production and staging environments.
 
 After setting up the pipeline, the user can proceed to create services that will utilize the pipeline. The service setup process collects all the necessary information to run the pipeline, verify code functionality, and promote it to production. This accessible interface replaces a YAML file (or equivalent configuration) in many current solutions.
@@ -245,7 +246,7 @@ During the pipeline run, the state machine sends status updates to the backend f
 
 ![Architecture](/img/case-study/architecture-simplified.svg)
 
-## 11.  Building the Core Pipeline Functionality
+## 11. Building the Core Pipeline Functionality
 
 ### 11.1 Modeling and Storing Data
 
@@ -349,13 +350,11 @@ Seamless utilizes the OAuth flow, using Github’s OAuth implementation to authe
 
 Aside from our public-facing API gateway, most AWS resources in Seamless’s infrastructure are provisioned in private subnets so they can’t accept incoming network traffic. In case a developer needs to interact with resources in private subnets, such as their relational database or Redis cache, we deploy a bastion host that a developer can SSH into.
 
-
 ## 14. Future Work
 
 Seamless could be improved to support more use cases and offer more functionality. These features include:
 Expand deployment options beyond ECS Fargate
 Support microservices not built using a Node.js runtime environment.
-
 
 ## References
 
