@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +11,12 @@
     --ifm-font-size-base: 17px;
   }
 }
+
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
 
 ul.table-of-contents li {
   font-size: 1rem;
@@ -20,13 +29,12 @@ article {
   margin-right: auto;
 }
 
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+/* Font for articles */
+/* :root {
+  font-family: 'Inter';
+} */
 
-/* You can override the default Infima variables here. */
+/* Tailwind indigo. */
 :root {
   --ifm-color-primary: #4f46e5;
   --ifm-color-primary-dark: #362ce1;
