@@ -22,7 +22,7 @@ export default function Features() {
             </p>
           </div>
           <img
-            src="/img/landing-page/state-machine-card.png"
+            src="/img/landing-page/state-machine-card.svg"
             className="block min-h-[290px] w-[290px] max-w-[1000px] rounded-3xl object-cover object-right shadow-lg dark:shadow-md dark:shadow-indigo-600/30 sm:w-full"
           />
         </div>
@@ -38,7 +38,7 @@ export default function Features() {
               </p>
             </div>
             <img
-              src="/img/landing-page/rollbacks-card.png"
+              src="/img/landing-page/rollbacks-card.svg"
               className="block w-full rounded-3xl border-2 border-solid border-[#0091E2] shadow-lg dark:shadow-md dark:shadow-sky-400/30"
             />
           </div>
@@ -52,7 +52,7 @@ export default function Features() {
               </p>
             </div>
             <img
-              src="/img/landing-page/reusable-pipeline-card.png"
+              src="/img/landing-page/reusable-pipeline-card.svg"
               className="block w-full rounded-3xl shadow-lg dark:shadow-md dark:shadow-indigo-600/30"
             />
           </div>
@@ -66,7 +66,7 @@ export default function Features() {
               </p>
             </div>
             <img
-              src="/img/landing-page/pipeline-monitoring-card.png"
+              src="/img/landing-page/pipeline-monitoring-card.svg"
               className="block w-full rounded-3xl border-2 border-solid border-slate-300 shadow-lg dark:shadow-md dark:shadow-stone-400/30"
             />
           </div>
