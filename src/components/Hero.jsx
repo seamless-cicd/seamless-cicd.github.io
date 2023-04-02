@@ -4,6 +4,7 @@ import Container from './Container';
 
 const IndigoStroke =
   require('@site/static/img/landing-page/indigo-stroke.svg').default;
+
 export default function Hero() {
   return (
     <Container className="flex flex-col items-center pt-16 sm:pt-20 sm:pb-20 lg:pt-28 lg:pb-24">
