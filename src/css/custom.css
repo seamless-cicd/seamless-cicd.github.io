@@ -6,11 +6,11 @@
 @tailwind utilities;
 
 /* Default font is too small */
-@media screen and (min-width: 997px) {
+/* @media screen and (min-width: 997px) {
   :root {
     --ifm-font-size-base: 17px;
   }
-}
+} */
 
 /**
  * Any CSS included here will be global. The classic template

@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '@theme/Layout';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Screenshot from '../components/Screenshot';
@@ -8,13 +9,14 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div className="font-display">
-      <Navbar />
-      <Hero />
-      <Screenshot />
-      <Animation />
-      <Features />
-      <Footer />
-    </div>
+    <Layout description="Seamless CI/CD">
+      <div className="font-display">
+        <Hero />
+        <Screenshot />
+        <Animation />
+        <Features />
+        <Footer />
+      </div>
+    </Layout>
   );
 }
