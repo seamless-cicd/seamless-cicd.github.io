@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import Container from './Container';
-import { Menu } from 'lucide-react';
+// import { Menu } from 'lucide-react';
 
 const Logo = require('@site/static/img/seamless-logo-with-text.svg').default;
 const GitHubLogo =
@@ -15,7 +15,7 @@ export default function Navbar() {
           <Logo className="w-[130px]" role="img" />
         </div>
         <div className="hidden items-center justify-center sm:col-span-8 lg:flex">
-          <ul className="my-0 mx-auto flex list-none gap-x-12 rounded-full border border-solid border-stone-300 px-10 py-1.5 text-sm font-semibold shadow-sm">
+          <ul className="mx-auto my-0 flex list-none gap-x-12 rounded-full border border-solid border-stone-300 px-10 py-1.5 text-sm font-semibold shadow-sm">
             <Link
               className="text-stone-700 hover:no-underline"
               to="/case-study"
@@ -48,7 +48,7 @@ export default function Navbar() {
           </a>
         </div>
         <div className="col-span-1 flex items-center justify-end lg:hidden ">
-          <Menu />
+          {/* <Menu /> */}
         </div>
       </nav>
     </Container>
