@@ -1,0 +1,175 @@
+# Runs
+
+<div>
+  <h2 className="mr-3 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    GET
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/runs?serviceId=:serviceId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">List all Runs for a Service</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to retrieve a list of all runs that are associated with a given service ID.
+  </p>
+</div>
+
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
+
+```json
+[
+  {
+    "id": "d8583d1c-ce63-4e0c-bd55-2088409bc7e3",
+    "createdAt": "2023-03-20T17:17:13.760Z",
+    "updatedAt": "2023-03-20T17:17:13.760Z",
+    "startedAt": "2023-03-20T17:17:13.760Z",
+    "endedAt": "2023-03-20T17:18:13.760Z",
+    "duration": 6000,
+    "commitHash": "ca4dfd3209de8d",
+    "commitMessage": "feat: add notification feature",
+    "committer": "Joe",
+    "status": "SUCCESS",
+    "triggerType": "MAIN",
+    "serviceId": "d8583d1c-ce63-4e0c-bd55-2088409bc7e2"
+  }
+]
+```
+
+---
+
+<div>
+  <h2 className="mr-3 mt-10 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    GET
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">
+      api/runs/:runId
+    </code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">List a Run</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to retrieve a single run using its id.
+  </p>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
+
+```json
+{
+  "id": "d8583d1c-ce63-4e0c-bd55-2088409bc7e3",
+  "createdAt": "2023-03-20T17:17:13.760Z",
+  "updatedAt": "2023-03-20T17:17:13.760Z",
+  "startedAt": "2023-03-20T17:17:13.760Z",
+  "endedAt": "2023-03-20T17:18:13.760Z",
+  "duration": 6000,
+  "commitHash": "ca4dfd3209de8d",
+  "commitMessage": "feat: add notification feature",
+  "committer": "Joe",
+  "status": "SUCCESS",
+  "triggerType": "MAIN",
+  "serviceId": "d8583d1c-ce63-4e0c-bd55-2088409bc7e2"
+}
+```
+
+---
+
+<div>
+  <h2 className="mr-3 mt-10 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    POST
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/runs?serviceId=:serviceId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Create a Run</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to add a new run that will be associated with a service. Placeholder stages will also be created and associated with the new run. These placeholder stages are for use by the state machine.
+  </p>
+</div>
+
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
+
+```json
+{
+  "id": "c6e690ba-d887-4976-bf5b-2ebd3a253bee",
+  "createdAt": "2023-03-28T13:08:15.471Z",
+  "updatedAt": "2023-03-28T13:08:15.471Z",
+  "startedAt": "2023-03-28T13:08:15.471Z",
+  "endedAt": null,
+  "duration": null,
+  "commitHash": "aade51f20cae9b",
+  "commitMessage": "chore: refactor",
+  "committer": "Jim",
+  "status": "IDLE",
+  "triggerType": "MAIN",
+  "serviceId": "d8583d1c-ce63-4e0c-bd55-2088409bc7e2"
+}
+```
+
+---
+
+<div>
+  <h2 className="mr-3 mt-10 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    PATCH
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/runs/:runId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Update a Run</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to update a run. Add the properties to be updated in the request body.
+  </p>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Request Headers</h3>
+  <ul>
+    <li>
+      <code className="text-indigo-600 dark: dark:text-indigo-400">Content-Type: application/json</code>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Request Body</h3>
+</div>
+
+```json
+{
+  "committer": "Sarah"
+}
+```
+
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
+
+```json
+{}
+```
+
+---
+
+<div>
+  <h2 className="mr-3 mt-10 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    DELETE
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/runs/:runId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Delete a Run</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to delete a run using its id.
+  </p>
+</div>
+
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
+
+```json
+{
+  "id": "d8583d1c-ce63-4e0c-bd55-2088409bc7e3",
+  "createdAt": "2023-03-20T17:17:13.760Z",
+  "updatedAt": "2023-03-20T17:17:13.760Z",
+  "startedAt": "2023-03-20T17:17:13.760Z",
+  "endedAt": "2023-03-20T17:17:14.760Z",
+  "duration": 60,
+  "commitHash": "ca4dfd3209de8d",
+  "commitMessage": "feat: add notification feature",
+  "committer": "Joe",
+  "status": "SUCCESS",
+  "triggerType": "MAIN",
+  "serviceId": "d8583d1c-ce63-4e0c-bd55-2088409bc7e2"
+}
+```
+
+---

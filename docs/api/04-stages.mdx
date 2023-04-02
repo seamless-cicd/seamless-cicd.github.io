@@ -1,10 +1,19 @@
 # Stages
 
-**Method:** `GET`
+<div>
+  <h2 className="mr-3 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    GET
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/stages?runId=:runId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">List all Stages for a Run</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to retrieve a list of all stages that are associated with a given run ID.
+  </p>
+</div>
 
-**Route:** `api/stages?runId=:runId`
-
-**Response Body:**
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
 
 ```json
 [
@@ -79,17 +88,26 @@
 
 ---
 
-**Method:** `PATCH`
+<div>
+  <h2 className="mr-3 mt-10 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    PATCH
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/stages/:stageId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Update a Stage</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to update a stage. Add the properties to be updated in the request body.
+  </p>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Request Headers</h3>
+  <ul>
+    <li>
+      <code className="text-indigo-600 dark: dark:text-indigo-400">Content-Type: application/json</code>
+    </li>
+  </ul>
+</div>
 
-**Route:** `api/stages/:stageId`
-
-**Request Headers:**
-
-- Content-Type: application/json
-
-**Request Body:**
-
-- Properties to be updated
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Request Body</h3>
+</div>
 
 ```json
 {
@@ -97,7 +115,9 @@
 }
 ```
 
-**Response Body:**
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
 
 ```json
 {}
@@ -105,11 +125,20 @@
 
 ---
 
-**Method:** `DELETE`
+<div>
+  <h2 className="mr-3 mt-10 text-2xl font-bold text-stone-800 dark:text-stone-100">
+    DELETE
+    <code className="ml-3 text-xl text-indigo-600 dark: dark:text-indigo-400">api/stages/:stageId</code>
+  </h2>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Delete a Stage</h3>
+  <p className="mb-3 text-stone-600 dark:text-stone-200">
+    This endpoint allows you to delete a stage using its id.
+  </p>
+</div>
 
-**Route:** `api/stages/:stageId`
-
-**Response Body:**
+<div>
+  <h3 className="mb-1 text-lg font-bold text-stone-600 dark:text-stone-200">Response Body</h3>
+</div>
 
 ```json
 {
@@ -124,3 +153,5 @@
   "runId": "c6e690ba-d887-4976-bf5b-2ebd3a253bee"
 }
 ```
+
+---
