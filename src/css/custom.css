@@ -18,6 +18,10 @@
  * work well for content-centric websites.
  */
 
+svg {
+  shape-rendering: auto;
+}
+
 ul.table-of-contents li {
   font-size: 1rem;
 }

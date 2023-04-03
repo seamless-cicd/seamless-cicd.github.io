@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <Layout description="Seamless CI/CD">
-      <div className="font-display">
+      <div className="font-display antialiased">
         <Hero />
         <Screenshot />
         {/* <Animation /> */}

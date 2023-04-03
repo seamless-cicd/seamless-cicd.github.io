@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Seamless',
   tagline: 'CI/CD Pipeline for Containerized Microservices',
-  favicon: 'img/seamless.png',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://seamless-cicd.github.io',
@@ -74,8 +74,8 @@ const config = {
         hideOnScroll: true,
         logo: {
           alt: 'Seamless CI/CD',
-          src: 'img/seamless-logo-with-text.svg',
-          srcDark: 'img/seamless-logo-with-text-dark.svg',
+          src: 'img/seamless-logo-with-text-dark.svg',
+          srcDark: 'img/seamless-logo-with-text-white.svg',
           width: 130,
         },
         items: [

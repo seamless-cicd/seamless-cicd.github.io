@@ -11,7 +11,7 @@ export default function Features() {
         Seamless is a cloud-native solution built on AWS
       </h3>
       <div className="mt-1 flex flex-col items-center sm:mt-4">
-        {/* Main Card */}
+        {/* Card Row 1 */}
         <div className="relative">
           <div className="absolute left-4 top-3 max-w-[250px] sm:left-5 sm:top-4">
             <h3 className="text-md m-0 font-display font-semibold text-white md:text-xl">
@@ -26,20 +26,51 @@ export default function Features() {
             className="block min-h-[290px] w-[290px] max-w-[1000px] rounded-3xl object-cover object-right shadow-lg dark:shadow-md dark:shadow-indigo-600/30 sm:w-full"
           />
         </div>
-        {/* Cards */}
+        {/* Card Row 2 */}
+        <div className="mt-0 grid w-full max-w-[1000px] grid-cols-1 gap-x-6 sm:grid-cols-2 lg:mt-6 lg:gap-x-12">
+          <div className="relative mt-6 max-w-[468px]">
+            <div className="absolute left-4 top-3 max-w-[210px] sm:left-5 sm:top-4">
+              <h3 className="text-md m-0 font-display font-semibold text-rose-700 md:text-xl">
+                Integration Testing
+              </h3>
+              <p className="font-display text-sm font-medium text-rose-600 sm:max-w-xs sm:text-sm">
+                With Docker Compose
+              </p>
+            </div>
+            <img
+              src="/img/landing-page/integration-test-card.svg"
+              className="block min-h-[300px] w-[290px] rounded-3xl border-2 border-solid border-slate-300 object-cover object-right shadow-lg dark:border-none dark:shadow-md dark:shadow-slate-400/30 sm:w-full"
+            />
+          </div>
+          <div className="relative mt-6 max-w-[468px]">
+            <div className="absolute left-4 top-3 max-w-[210px] sm:left-5 sm:top-4">
+              <h3 className="text-md m-0 font-display font-semibold text-sky-50 md:text-xl">
+                TypeScript-First
+              </h3>
+              <p className="font-display text-sm font-medium text-sky-200 sm:max-w-xs sm:text-sm">
+                Data and form validation
+              </p>
+            </div>
+            <img
+              src="/img/landing-page/typescript-first-card.svg"
+              className="block min-h-[300px] w-[290px] rounded-2xl object-cover object-right shadow-lg dark:shadow-md dark:shadow-sky-800/30 sm:w-full"
+            />
+          </div>
+        </div>
+        {/* Card Row 3 */}
         <div className="mt-0 grid w-full max-w-[1000px] grid-cols-1 gap-x-6 sm:grid-cols-3 lg:mt-6 lg:gap-x-12">
           <div className="relative mt-6 max-w-[290px]">
             <div className="absolute left-4 top-3 max-w-[210px] sm:left-5 sm:top-4">
-              <h3 className="text-md m-0 font-display font-semibold text-stone-800 md:text-xl">
+              <h3 className="text-md m-0 font-display font-semibold text-slate-800 md:text-xl">
                 Rollbacks
               </h3>
-              <p className="font-display text-sm font-medium text-stone-600 sm:max-w-xs sm:text-sm sm:text-stone-600">
+              <p className="font-display text-sm font-medium text-slate-600 sm:max-w-xs sm:text-sm">
                 Revert to tagged images in the registry
               </p>
             </div>
             <img
               src="/img/landing-page/rollbacks-card.svg"
-              className="block w-full rounded-3xl border-2 border-solid border-[#0091E2] shadow-lg dark:shadow-md dark:shadow-sky-400/30"
+              className="block w-full rounded-3xl border-2 border-solid border-[#0091E2] shadow-lg dark:border-none dark:shadow-md dark:shadow-sky-400/30"
             />
           </div>
           <div className="relative mt-6 max-w-[290px]">
@@ -67,7 +98,7 @@ export default function Features() {
             </div>
             <img
               src="/img/landing-page/pipeline-monitoring-card.svg"
-              className="block w-full rounded-3xl border-2 border-solid border-slate-300 shadow-lg dark:shadow-md dark:shadow-stone-400/30"
+              className="block w-full rounded-3xl border-2 border-solid border-slate-300 shadow-lg dark:border-none dark:shadow-md dark:shadow-slate-400/30"
             />
           </div>
         </div>

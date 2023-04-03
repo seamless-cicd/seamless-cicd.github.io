@@ -18,7 +18,7 @@ export default function Hero() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
-            className="absolute top-[60%] left-0 h-[0.65em] w-full fill-indigo-200 dark:fill-indigo-700"
+            className="absolute left-0 top-[60%] h-[0.65em] w-full fill-indigo-200 dark:fill-indigo-700"
             preserveAspectRatio="none"
           >
             <path d="M123.577 2.41887C104.338 4.1689 86.8183 4.60294 19.2478 16.0696C-3.74517 19.9715 -6.42681 26.8734 12.7609 23.168C49.5192 16.0696 62.4802 14.1369 81.9533 11.7014C107.667 8.48535 154.3 3.76421 170.065 5.14897C182.498 6.24104 181.201 7.47898 179.796 8.4252C176.552 10.6093 156.551 17.1617 151.146 24.8061C147.847 29.4706 158.604 27.9126 166.822 26.9902C186.282 24.8061 207.866 20.8936 261.421 19.8918C319.802 18.7998 348.874 23.168 352.777 23.168C357.642 23.168 364.669 20.9839 358.723 19.8918C350.131 18.3138 294.487 14.4315 246.285 16.0696C205.26 17.4638 167.143 21.0393 163.038 22.076C160.876 22.622 161.957 21.5299 164.66 19.8918C167.363 18.2537 186.388 10.0633 187.905 8.4252C192.48 3.48302 183.04 0.780715 173.85 0.234738C164.003 -0.350317 149.291 0.0799695 123.577 2.41887Z" />
@@ -40,7 +40,7 @@ export default function Hero() {
       </h2>
       <div className="mt-6">
         <Link to="/case-study" className="hover:no-underline">
-          <button className="from-10% via-40% to-95% group flex cursor-pointer items-center gap-x-1 rounded-full border-none bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-900 px-5 py-2.5 font-display text-base font-semibold text-white shadow-md transition-colors hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:scale-95 dark:shadow-indigo-600/30">
+          <button className="group flex cursor-pointer items-center gap-x-1 rounded-full border-none bg-gradient-to-br from-indigo-700 from-10% via-indigo-600 via-40% to-indigo-900 to-95% px-5 py-2.5 font-display text-base font-semibold text-white shadow-md transition-colors hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:scale-95 dark:shadow-indigo-600/30">
             <span>Read Case Study</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export default function Hero() {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             >
               <line x1="7" y1="17" x2="17" y2="7"></line>
               <polyline points="7 7 17 7 17 17"></polyline>
