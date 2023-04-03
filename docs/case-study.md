@@ -220,9 +220,11 @@ The dashboard provides users with the ability to set up their pipeline and manag
 
 The dashboard provides users with the ability to set up their pipeline and manage the associated services. When setting up the pipeline, the user will provide their ECS Cluster information for both production and staging environments.
 
+![service gif](/img/gifs/service.gif)
+
 After setting up the pipeline, the user can proceed to create services that will utilize the pipeline. The service setup process collects all the necessary information to run the pipeline, verify code functionality, and promote it to production. This accessible interface replaces a YAML file (or equivalent configuration) in many current solutions.
 
-**(GIF of service setup form)**
+![pipeline gif](/img/gifs/pipeline.gif)
 
 ### Running the Pipeline
 
