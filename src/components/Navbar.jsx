@@ -3,9 +3,10 @@ import Link from '@docusaurus/Link';
 import Container from './Container';
 // import { Menu } from 'lucide-react';
 
-const Logo = require('@site/static/img/seamless-logo-with-text.svg').default;
-const GitHubLogo =
-  require('@site/static/img/landing-page/github-logo-indigo.svg').default;
+const Logo =
+  require('@site/static/img/seamless-logo-with-text-dark.svg').default;
+// const GitHubLogo =
+// require('@site/static/img/landing-page/github-logo-indigo.svg').default;
 
 export default function Navbar() {
   return (
@@ -41,10 +42,10 @@ export default function Navbar() {
         </div>
         <div className="hidden justify-end lg:col-span-2 lg:flex">
           <a href="https://github.com/seamless-cicd" target="_blank">
-            <GitHubLogo
+            {/* <GitHubLogo
               className="block w-[40px] transition-transform hover:scale-110"
               role="img"
-            />
+            /> */}
           </a>
         </div>
         <div className="col-span-1 flex items-center justify-end lg:hidden ">
