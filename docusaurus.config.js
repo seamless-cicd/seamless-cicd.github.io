@@ -74,8 +74,8 @@ const config = {
         hideOnScroll: true,
         logo: {
           alt: 'Seamless CI/CD',
-          src: 'img/seamless-logo-with-text-dark.svg',
-          srcDark: 'img/seamless-logo-with-text-white.svg',
+          src: 'img/seamless-logo-text-dark.svg',
+          srcDark: 'img/seamless-logo-text-white.svg',
           width: 130,
         },
         items: [
