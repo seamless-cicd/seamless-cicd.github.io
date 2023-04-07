@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
@@ -92,9 +95,8 @@ const config = {
             label: 'Presentation',
           },
           {
-            type: 'doc',
+            to: 'the-team',
             position: 'right',
-            docId: 'the-team',
             label: 'The Team',
           },
           {
@@ -110,10 +112,6 @@ const config = {
           },
         ],
       },
-      // footer: {
-      //   style: 'dark',
-      //   copyright: `Copyright © ${new Date().getFullYear()} Seamless CI/CD. Built with Docusaurus.`,
-      // },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
