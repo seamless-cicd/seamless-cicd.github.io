@@ -9,7 +9,7 @@ export default function Screenshot() {
           className="z-20 w-full max-w-[1200px]"
         />
       </div>
-      <div className="absolute z-0 h-[175px] w-full bg-gradient-to-br from-rose-600 via-purple-500 to-indigo-800 sm:h-[350px] lg:h-[600px]"></div>
+      <div className="absolute z-0 h-[250px] w-full -skew-y-6 transform bg-gradient-to-br from-rose-600 from-15% via-purple-500 via-50% to-indigo-800 to-90% sm:h-[350px] lg:h-[600px]"></div>
     </div>
   );
 }
