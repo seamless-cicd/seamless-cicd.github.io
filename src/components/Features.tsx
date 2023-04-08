@@ -3,7 +3,7 @@ import Container from './Container';
 
 export default function Features() {
   return (
-    <Container className="mt-8 flex flex-col items-center sm:mt-16">
+    <Container className="mt-12 flex flex-col items-center sm:mt-20">
       <h2 className="mb-0 inline-block bg-gradient-to-br from-rose-600 from-15% via-purple-600 via-60% to-indigo-700 to-90% bg-clip-text text-center font-display text-2xl font-semibold tracking-tight text-transparent sm:text-4xl">
         Pipeline Features
       </h2>
