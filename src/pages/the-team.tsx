@@ -33,9 +33,9 @@ export default function Team() {
     <Layout title="The Team" description="The Team">
       <div className="mx-auto w-full max-w-4xl px-8 py-8 text-center sm:py-24">
         <h1 className="text-[32px] sm:text-5xl">The Team</h1>
-        <p className="mx-auto mb-0 mt-4 max-w-sm text-lg sm:mt-8 sm:text-2xl md:max-w-lg lg:max-w-none">
-          We are looking for opportunities. If you like our project, feel free
-          to reach out!
+        <p className="mx-auto mb-0 mt-4 max-w-prose text-lg sm:mt-8 sm:text-2xl">
+          We are searching for software engineering positions. Please reach out
+          to discuss how our skills can bring value to your team.
         </p>
         <div className="mt-0 grid grid-cols-1 sm:mt-4 sm:grid-cols-3">
           {team.map((member) => (
