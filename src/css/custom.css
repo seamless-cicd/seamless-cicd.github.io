@@ -1,16 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Default font is too small */
-/* @media screen and (min-width: 997px) {
-  :root {
-    --ifm-font-size-base: 17px;
-  }
-} */
 
 /**
  * Any CSS included here will be global. The classic template
@@ -32,11 +24,6 @@ article {
   margin-left: auto;
   margin-right: auto;
 }
-
-/* Font for articles */
-/* :root {
-  font-family: 'Inter';
-} */
 
 /* Tailwind indigo. */
 :root {

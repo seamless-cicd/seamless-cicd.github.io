@@ -32,7 +32,7 @@ export default function Hero() {
       </h1>
       <h2 className="m-0 mt-8 max-w-xs font-display text-base font-medium dark:text-stone-100 sm:mt-14 sm:max-w-lg sm:text-xl">
         <span className="font-semibold">Seamless</span> is an open-source,
-        self-hosted {<br className="hidden sm:block" />}
+        low-config {<br className="hidden sm:block" />}
         <span className="text-indigo-700 dark:text-indigo-500">
           CI/CD pipeline
         </span>{' '}

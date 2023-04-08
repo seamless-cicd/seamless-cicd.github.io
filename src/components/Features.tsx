@@ -3,14 +3,15 @@ import Container from './Container';
 
 export default function Features() {
   return (
-    <Container className="mt-4 flex flex-col items-center sm:mt-20">
-      <h2 className="mb-0 inline-block bg-gradient-to-br from-rose-600 from-15% via-purple-600 via-60% to-indigo-700 to-90% bg-clip-text font-display text-2xl font-semibold tracking-tight text-transparent sm:text-4xl">
-        Architected for Scale
+    <Container className="mt-12 flex flex-col items-center sm:mt-20">
+      <h2 className="mb-0 inline-block bg-gradient-to-br from-rose-600 from-15% via-purple-600 via-60% to-indigo-700 to-90% bg-clip-text text-center font-display text-2xl font-semibold tracking-tight text-transparent sm:text-4xl">
+        Pipeline Features
       </h2>
-      <h3 className="mt-0 max-w-xs text-center font-display text-base font-medium text-stone-800 dark:text-stone-100 sm:mt-2 sm:max-w-none sm:text-xl">
-        Seamless is a cloud-native solution built on AWS
+      <h3 className="mt-1 max-w-prose text-center font-display text-sm font-medium text-stone-700 dark:text-stone-100 sm:mt-4 sm:text-xl">
+        Seamless automates the building, testing, and deployment of code,
+        enabling developers to deliver software quickly and reliably
       </h3>
-      <div className="mt-1 flex flex-col items-center sm:mt-4">
+      <div className="mt-1 flex flex-col items-center sm:mt-6">
         {/* Card Row 1 */}
         <div className="relative">
           <div className="absolute left-4 top-3 max-w-[250px] sm:left-5 sm:top-4">
@@ -23,7 +24,7 @@ export default function Features() {
           </div>
           <img
             src="/img/landing-page/state-machine-card.png"
-            className="block min-h-[290px] w-[290px] max-w-[1000px] rounded-3xl object-cover object-right shadow-lg dark:shadow-md dark:shadow-indigo-600/30 sm:w-full"
+            className="block min-h-[290px] w-[290px] max-w-[1000px] rounded-3xl object-cover object-right shadow-md dark:shadow-indigo-600/30 sm:w-full"
           />
         </div>
         {/* Card Row 2 */}
@@ -39,13 +40,13 @@ export default function Features() {
             </div>
             <img
               src="/img/landing-page/integration-test-card.png"
-              className="block min-h-[300px] w-[290px] rounded-3xl border-2 border-solid border-slate-300 object-cover object-right shadow-lg dark:border-none dark:shadow-md dark:shadow-slate-400/30 sm:w-full"
+              className="block min-h-[300px] w-[290px] rounded-3xl border-2 border-solid border-slate-300 object-cover object-right shadow-md dark:border-none dark:shadow-slate-400/30 sm:w-full"
             />
           </div>
           <div className="relative mt-6 max-w-[468px]">
             <div className="absolute left-4 top-3 max-w-[210px] sm:left-5 sm:top-4">
               <h3 className="text-md m-0 font-display font-semibold text-sky-50 md:text-xl">
-                TypeScript-First
+                TypeScript
               </h3>
               <p className="font-display text-sm font-medium text-sky-200 sm:max-w-xs sm:text-sm">
                 Data and form validation
@@ -53,7 +54,7 @@ export default function Features() {
             </div>
             <img
               src="/img/landing-page/typescript-first-card.png"
-              className="block min-h-[300px] w-[290px] rounded-2xl object-cover object-right shadow-lg dark:shadow-md dark:shadow-sky-800/30 sm:w-full"
+              className="block min-h-[300px] w-[290px] rounded-2xl object-cover object-right shadow-md dark:shadow dark:shadow-sky-800/30 sm:w-full"
             />
           </div>
         </div>
@@ -70,7 +71,7 @@ export default function Features() {
             </div>
             <img
               src="/img/landing-page/rollbacks-card.png"
-              className="block w-full rounded-3xl border-2 border-solid border-[#0091E2] shadow-lg dark:border-none dark:shadow-md dark:shadow-sky-400/30"
+              className="block w-full rounded-3xl border-2 border-solid border-[#0091E2] shadow-md dark:border-none dark:shadow-sky-400/30"
             />
           </div>
           <div className="relative mt-6 max-w-[290px]">
@@ -84,7 +85,7 @@ export default function Features() {
             </div>
             <img
               src="/img/landing-page/reusable-pipeline-card.png"
-              className="block w-full rounded-3xl shadow-lg dark:shadow-md dark:shadow-indigo-600/30"
+              className="block w-full rounded-3xl shadow-md dark:shadow dark:shadow-indigo-600/30"
             />
           </div>
           <div className="relative mt-6 max-w-[290px]">
@@ -98,7 +99,7 @@ export default function Features() {
             </div>
             <img
               src="/img/landing-page/pipeline-monitoring-card.png"
-              className="block w-full rounded-3xl border-2 border-solid border-slate-300 shadow-lg dark:border-none dark:shadow-md dark:shadow-slate-400/30"
+              className="block w-full rounded-3xl border-2 border-solid border-slate-300 shadow-md dark:border-none dark:shadow-slate-400/30"
             />
           </div>
         </div>
