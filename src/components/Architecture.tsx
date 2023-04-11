@@ -14,11 +14,11 @@ export default function Architecture() {
       </h3>
       <div className="mt-2 sm:mt-8">
         <img
-          src="/img/case-study/architecture-final.png"
+          src="/img/landing-page/architecture-final.png"
           className="z-20 block w-full max-w-[1000px] dark:hidden"
         />
         <img
-          src="/img/case-study/architecture-final-darkmode.png"
+          src="/img/landing-page/architecture-final-darkmode.png"
           className="z-20 hidden w-full max-w-[1000px] dark:block"
         />
       </div>

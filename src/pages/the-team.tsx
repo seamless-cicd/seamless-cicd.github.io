@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 const team = [
   {
     name: 'Ethan Weiner',
-    image: 'ethan.svg',
+    image: 'ethan.png',
     website: 'https://github.com/ethanjweiner',
     github: 'https://github.com/ethanjweiner',
     linkedin: 'https://www.linkedin.com/in/ethan-weiner/',
@@ -20,7 +20,7 @@ const team = [
   },
   {
     name: 'Ryan DeJonghe',
-    image: 'ryan.svg',
+    image: 'ryan.png',
     website: 'https://github.com/RDeJonghe',
     github: 'https://github.com/RDeJonghe',
     linkedin: 'https://github.com/RDeJonghe',
