@@ -211,163 +211,409 @@ Development teams using a manual deployment process for microservices might be l
 
 ## 7. Manually Building a CI/CD Pipeline for Microservices
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Building a CI/CD pipeline from scratch can be time-consuming and difficult, especially if it needs to handle the inherent complexities of a microservices architecture. Smaller teams with limited experience with cloud infrastructure and automation may struggle to architect a robust pipeline. They might also lack the staff and expertise to maintain and optimize it. The following is an example list of tasks for setting up a pipeline on AWS (we definitely don’t expect you to read everything, though you’re welcome to).
 
 ![Building-a-pipeline](/img/case-study/section-7/building-a-pipeline.png)
 
+Instead of investing significant time and effort into this project, teams may choose to leverage existing CI/CD solutions to simplify the process.
+
 ## 8. Existing Solutions
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Existing solutions typically fall into two categories: DIY solutions and commercial solutions.
+
+### DIY Solutions
+
+For organizations with more complex CI/CD pipeline setups, DIY solutions might be the best fit. There are many free open-source DIY CI/CD tools such as Jenkins, Ansible, Gitlab, and Tekton. These tools offer a high level of customization and control, allowing the tool to be tailored to a specific use case. For example, Jenkins achieves this customizability through its extensive plugin library.[^22]
+
+Many DIY tools also allow for pipeline modularization and reusability. Jenkins accomplishes pipeline modularization through shared libraries while Tekton allows for the reusability of different subcomponents, such as tasks and pipelines.[^23]
+
+While DIY solutions like Jenkins and Tekton offer a high degree of customization, they do require users to have a certain level of expertise in the relevant technologies. This means that teams with less experience in CI/CD may find them challenging to use, as they require users to make decisions about plugins, integrations, and deployment options. For example, with Jenkins, users must have knowledge of relevant plugins and be comfortable maintaining their own infrastructure. Likewise, Tekton requires experience with Kubernetes to set up and use effectively.
+
+While companies with CI/CD expertise might be equipped to build customized pipelines, less established teams might reach for a Software as a Service (SaaS) product to help manage their CI/CD needs.
+
+### Commercial Solutions
+
+There are various commercial CI/CD pipelines available such as Codefresh, Semaphore, CircleCI, and AWS CodePipeline. While not typically as flexible as open-source tools, these solutions do generally provide a degree of customization. For instance, YAML configuration files are commonly used to configure pipelines and their stages.
+
+Some commercial CI/CD solutions offer pipeline modularization and reusability. With CodeFresh, a single pipeline can be linked to multiple repositories, or “triggers”. Environment variables associated with each trigger can then be passed to the pipeline at execution time. Meanwhile, Semaphore offers a “monorepo” approach, enabling multiple applications stored in a single repository to access the same CI/CD pipeline.
+
+Some commercial CI/CD solutions provide microservice-specific testing solutions. For example, in order to test one service against other services, Codefresh allows the user to specify “sidecar containers” that will spin up during specified stages of the pipeline.
+
+Commercial solutions are not suitable for the CI/CD needs of all teams. They are typically not as extensible as open-source solutions, making them unsuitable for certain use cases. And despite being generally easier to use than DIY tools, they usually still require setting up and configuring pipelines.
+
+### A Solution for Our Use Case
+
+We wanted to build a tool for a specific use case: companies with a lower employee count that have embraced a containerized, microservices approach, seeking an uncomplicated solution for managing their CI/CD pipelines across their microservices.
+
+While microservice architectures are commonly associated with large enterprises such as Netflix, some startups and small teams utilize a microservice-first approach. Startups that value fast feedback cycles often turn to microservice architectures as they allow for the release of incremental updates to microservices in isolation.[^24] Furthermore, startups anticipating a need to scale might adopt microservices early on because small microservices are easier to scale independently than a giant monolith.[^25]
+
+An example of this is Sortal, a digital asset management product built by a startup using microservices. Despite being a small application, Sortal still had “a lot of [deployment] processes to manage, especially for a small team.”[^26] Sortal’s small team overcame this complexity by utilizing a centralized, automated pipeline that enabled them to continuously deploy their application. We sought to assist companies with similar profiles in managing their microservices architecture.
+
+Our solution would make managing the deployment of multiple microservices easier by applying a single, reusable, pipeline to each of the user's services. It would require minimal configuration by providing sensible default settings that meet the typical demands of a CI/CD pipeline. However, it would still accommodate different CI/CD workflows (varying branching, merging, and auto-deployment strategies).
+
+Furthermore, unlike most commercial products, our solution would be open-source and fully self-hosted, allowing for complete control of code and data ownership. Lastly, it would provide options for testing and inspecting microservices at different levels of granularity.
 
 ![Comparison chart](/img/case-study/section-8/comparison-chart.png)
 
 ## 9. Introducing Seamless
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Seamless is an open-source CI/CD pipeline tool designed specifically for containerized microservices deployed to AWS Elastic Container Service (ECS) Fargate. It offers a user-friendly interface that is similar to many of the popular interfaces found in commercial solutions. Unlike other CI/CD pipelines, Seamless does not require user-defined scripting through a YAML file template for configuration. Instead, Seamless relies on a core set of default stages: Prepare, Code Quality, Unit Test, Build, Integration Test, Deploy to Staging, and Deploy to Production. This approach makes Seamless easy to use right out of the box. Through the interface, users simply provide the necessary commands needed to run each stage. In the following sections, we will explore the steps a user takes to install, set up, and run Seamless’s CI/CD pipeline on their microservices.
+
+### Installing Seamless
+
+In order to install and deploy Seamless a user must have:
+
+- An AWS account
+- `npm` installed
+- The AWS CLI installed and configured
+- The AWS CDK command line tool installed
+
+To install the Seamless CLI, the user runs `npm install -g @seamless-cicd/seamless`. Global installation is required. Next, running `seamless init` will guide this person through a series of inputs needed to deploy Seamless. After completing the initialization process, executing `seamless deploy` will provision Seamless's infrastructure on AWS and provide a URL to access the platform's dashboard.
 
 ![Cli commands](/img/case-study/section-9/cli-commands.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Using Seamless
+
+After deploying Seamless’s infrastructure, the user can visit the dashboard and complete the pipeline setup process. They will provide the names of their production and staging environments (ECS clusters) so that Seamless knows where to deploy their microservices.
 
 ![Pipeline gif](/img/gifs/pipeline.gif)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#### Connecting Services to the Pipeline
+
+Upon completing the setup of the pipeline, the user can create multiple services that will utilize the pipeline. The service setup process collects all the necessary information to run the pipeline, verify code functionality, and promote it to production.
 
 ![Service gif](/img/gifs/service.gif)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#### Running the Pipeline
+
+Now the pipeline is ready to be activated. It can be triggered manually or by the version control changes:
+
+1. A pull request is opened (PR Open)
+2. A commit is made on a pull request (PR Sync)
+3. A pull request is merged (Commit to Main)
 
 ![Pipeline triggers](/img/case-study/section-9/pipeline-triggers.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Now that the pipeline is running, the user might want to view its progress.
 
-**(GIF of live status updates here)**
+#### Monitoring the Pipeline
 
-## 10. Seamless’s Architecture
+Seamless’s UI displays live updates of both runs and stages, enabling users to stay informed of pipeline outcomes as runs and stages transition from “Idle” to “In Progress”, and ultimately to “Success” or “Failure”. Log data is updated live, making it easier to identify and troubleshoot errors when they occur.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+_**(GIF of live status updates here)**_
+
+We will now shift the discussion toward the technical challenges we faced when building Seamless.
+
+## 10. Architecture Overview
+
+We’ll start with the fundamental challenges we had to address, provide a high-level overview of our core architecture, and then dive deeper into design decisions and tradeoffs.
+
+### Fundamental Challenges
+
+When building our initial prototype, we focused on the fundamental problems that needed to be solved in order to build the core functionality of a CI/CD pipeline:
+
+- Deciding how to model pipeline data, and selecting a database that we could run detailed queries on
+- Configuring code repositories to notify Seamless whenever code changes, and setting up a way to use those notifications as triggers to automatically start the pipeline
+- Finding a mechanism to monitor and control the pipeline’s execution flow, with the ability to store complex state
+- Determining how and where to execute the physical steps of each pipeline stage
+
+### Core Architecture
+
+After some initial prototyping, we arrived at the architecture below, which shows the high-level flow of how a pipeline is triggered and executed. A backend server listens for webhooks from a code repository, retrieves pipeline information from a database, and starts the pipeline. The pipeline performs a series of tasks, including deploying the updated application to production.
 
 ![Architecture core simplified](/img/case-study/section-10/architecture-core-simplified.png)
 
+With an overall direction in mind, we decided to explore different options for each component of our core architecture.
+
 ## 11. Building the Core Pipeline Functionality
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Modeling and Storing Data
+
+At the outset, we created a data model that served as the bedrock for the remainder of our application. It comprises four fundamental entities: Pipelines, Services, Runs, and Stages. As a reminder, smaller companies without dedicated teams for managing multiple disparate CI/CD pipelines can simplify their CI/CD management by using a single pipeline for multiple services. Subsequently, our data model establishes a one-to-many relationship between Pipelines and Services. Additionally, each Service can have many Runs and each Run can have many Stages.
 
 ![Data model](/img/case-study/section-11/data-model.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+At first, we considered using a NoSQL document store like DynamoDB to store our data. NoSQL document stores are optimized for speed, scalability, and storing unstructured data. However, given that our project does not involve high-frequency read or write operations, and our schema is fixed, we opted for PostgreSQL, a relational database. We rely on the Prisma ORM to streamline schema creation and migration, as well as data manipulation.
+
+With our data model in place, we narrowed in on how we could automate the journey of code from source to production.
+
+### Automating Pipeline Runs
+
+A key component of automated deployment pipelines is their ability to execute immediately when source code is modified. Webhooks are used to link user repositories to the pipeline:
 
 ![Webhook](/img/case-study/section-11/webhook-wide.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Seamless registers the webhooks using Github’s Octokit client. The flow from Webhook registration to pipeline initiation is as follows:
+
+1. Seamless creates a webhook in the user's repository, utilizing GitHub's Octokit client to authenticate and interact with their API.
+2. The user makes an update to the source code.
+3. GitHub sends a webhook to Seamless’s backend server.
+4. The backend uses the payload of the webhook to identify the trigger and initiate the appropriate pipeline process.
 
 ![Create webhook](/img/case-study/section-11/create-webhook.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+However, running the entire deployment pipeline for every change would have compromised our goal of velocity. To overcome this challenge, we tailored our pipeline to three distinct triggers:
+
+1. Merge/Push to Main
+2. Open Pull Request
+3. Synchronize/Update Pull Request
+
+For pushes to the main branch, the entire pipeline is executed, whereas pull request opens and synchronizations only perform code quality checks and tests, without any intention of deployment:
 
 ![Trigger partial vs full run](/img/case-study/section-11/trigger-partial-vs-full-run.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+With a system in place to trigger the pipeline, we moved on to building out the pipeline itself.
+
+### Managing Pipeline Execution
 
 ![Architecture core simplified taskmanager](/img/case-study/section-11/architecture-core-simplified-taskmanager.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+First, we needed to consider how to manage the execution flow of our pipeline. We aimed to avoid having a single fixed execution path for our pipeline, as the degree to which different companies' CI/CD workflows embrace automation can vary significantly. The execution path could differ depending on:
+
+1. What triggered it
+2. User-configured settings, such as whether a staging environment is used
+3. The success of tasks
+
+We wanted to build a system that would behave differently depending on these factors. We also wanted our system to keep track of the state of the pipeline as it ran so we could inform users of it.
+
+Our initial approach to managing tasks was to use a job queue to run tasks in a linear manner. This did not suffice for our final use case. The job queue lacked built-in capabilities to model nonlinear execution paths taken by our pipeline. Furthermore, it did not provide a centralized way to track the status of the pipeline and its stages, nor could it guarantee that only one stage was executing at a time.
+
+We also looked into event-driven architecture where each task would call the next, and there would be no manager. However, we felt that having a central place to manage state would make managing and debugging our pipeline easier.
+
+Ultimately, we decided to use a state machine to orchestrate pipeline executions. The state machine model allowed us to describe the behavior of our pipeline by defining all possible states for each stage (such as Idle, Success, Fail, or In Progress), the transitions between these states, and the decisions along the way that could affect its execution flow.
 
 ![State machine example](/img/case-study/section-11/state-machine-example.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+One drawback to state machines was that defining states and transitions in advance would limit the ability to add new steps dynamically. As a result, the core logic of the pipeline would be unmodifiable once it is set up. We determined that this tradeoff was acceptable for our use case. Smaller organizations early in their adoption of microservices are more likely to have services with similar CI/CD requirements, resulting in a reduced need for customizability.
+
+Next, we needed to determine how we would run our state machine. We knew the state machine would have varying usage patterns, depending on the team's commit rate and other factors. To accommodate this flexibility, we opted for a serverless, pay-as-you-go infrastructure that could scale according to our users' needs.
+
+AWS offers a serverless state machine service called Step Functions that integrates natively with other AWS services. As the Step Function progresses through the stages in our pipeline, it uses a context object to communicate pipeline status to our backend effectively.
 
 ![Step function definition](/img/case-study/section-11/step-function-definition.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+We also considered running the state machine directly on our backend servers, utilizing the XState JavaScript library to define the logic, but its lack of AWS integrations made it less suitable for our needs. Additionally, this approach may have introduced scaling challenges that were abstracted by using step functions.
+
+At this point, we had a tool that would help us manage pipeline tasks, but we also needed to consider how to run the tasks themselves.
+
+### Running Tasks
 
 ![Architecture core simplified taskexecutors](/img/case-study/section-11/architecture-core-simplified-taskexecutors.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+A pipeline task comprises the set of operations that must be performed to fulfill the purpose of a given stage. In Seamless, a task is a Javascript program. Some of these programs run child processes that execute commands for cloning, building, and testing code, while others use the AWS SDK to perform deployment-related actions.
 
 ![Build task](/img/case-study/section-11/build-task.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Now that we know what a task is, let’s look at the two infrastructure choices we had for running these tasks: virtual machines and containers.
+
+#### Virtual Machines or Containers
+
+To determine the appropriate infrastructure for running pipeline tasks, we examined the nature of the tasks themselves.
+
+1. Tasks are **consistent**: For every pipeline run, each task should operate in the same way.
+2. Tasks are **ephemeral**: Once a task runs, it will not rerun until the next pipeline execution.
+3. Tasks **fluctuate with demand**: Depending on the team's commit rate and other factors, the frequency at which a task runs can vary over time.
+
+One approach we explored was having a dedicated build server running on a virtual machine (VM) to build, test, and deploy a user’s application. This fulfilled our need for a centralized, consistent environment to run tasks. Additionally, VMs also offer full hardware virtualization, providing strong isolation from other virtual machines running on the same host. However, the virtual machine approach had a few drawbacks:
+
+1. **Elasticity**: Scaling VMs to meet the demands of the pipeline is slow because they take a few minutes to start.
+2. **Resource-Intensive**: VMs require significant resources since each virtualizes an entire operating system. Furthermore, the VM running the pipeline would need to be configured with all dependencies to run any pipeline tasks.
+
+To overcome the limitations of virtual machines, we explored alternative solutions and discovered that using containers to run steps in CI/CD pipelines is a prevalent industry trend.[^27] Like a build server on a virtual machine, containers provide consistent environments for running tasks. However, unlike virtual machines, containers are more lightweight, meaning that they can more easily spin up and down automatically to match demand.
 
 ![Container vs vm](/img/case-study/section-11/container-vs-vm.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+As our infrastructure was already hosted on AWS, we aimed to find an AWS-native way to run containers, and so decided to use Amazon’s Elastic Container Service (ECS).
+
+#### Managing Servers
+
+Our next decision was whether to run containers in a serverless fashion with ECS Fargate or to have direct access to the virtual machines hosting the containers. While Fargate would reduce underlying server management overhead, it was not a feasible choice. We actually needed access to the underlying virtual machines in order to run Docker within our containers for tasks such as building services as images. Without access to the virtual machines, we couldn't achieve this functionality. Consequently, we determined that running ECS on EC2, AWS’s virtual machine service, was the optimal solution for our specific requirements.
+
+Since Step Functions natively integrates with other AWS services, we could trigger the ECS task containers (or, as we call them, Task Executors) directly from it, as the below diagram depicts:
 
 ![Task containers](/img/case-study/section-11/task-containers.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Overview of Core Functionality
+
+Ultimately we settled on the following implementation for our core architecture:
+
+1. A change in the user’s Github repository sends a webhook to Seamless’s backend.
+2. Seamless’s backend processes the webhook and fetches relevant information from Postgres to start the state machine.
+3. A state machine running on Step Functions orchestrates the pipeline execution flow.
+4. The state machine calls ECS task executors to run pipeline tasks.
 
 ![Architecture core detailed](/img/case-study/section-11/architecture-core-detailed.png)
 
+Once we had built the structural foundation for the pipeline, we looked to expand our project further.
+
 ## 12. Improving Core Functionality
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Once Seamless’ core functionality was working, users were able to automatically test, build, and deploy their microservices upon changes in version control. With our core pipeline in place, we decided to add features to make our CI/CD pipeline more robust and targeted toward microservices. Below is a more detailed diagram of our architecture, with improved functionality in place:
 
 ![Architecture improved simplified predeployment](/img/case-study/section-12/architecture-improved-simplified-predeployment.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Realtime Dashboard Updates
+
+In order to give the user the ability to detect and respond to pipeline issues as they occur, we implemented real-time updates that are sent to our dashboard.
+
+We considered using client-side polling, where the client queries the API at regular intervals but ultimately decided against it because it generates unnecessary HTTP requests and might cause delays between backend and frontend updates. We decided to use WebSockets instead. The dashboard initiates a WebSockets connection to a Websockets API Gateway on the backend. Status updates and logs arriving on the backend are forwarded to the dashboard via the WebSockets connection persisted by the API Gateway.
 
 ![Polling vs websockets](/img/case-study/section-12/polling-vs-websockets.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Improvements to Pre-Deployment Tasks
+
+#### Sharing Data Among Containers
+
+To minimize repeated work, we needed to ensure that multiple pipeline tasks could access the same files. For example, the Prepare Stage clones the source code so the Build Stage can package it into a Docker image later. To achieve this, we used the AWS EFS network file system, which is designed to be mounted to any number of EC2 instances or ECS containers. EFS scales automatically by providing the necessary storage without needing to specify the capacity in advance.
+
+When each container is started, it is automatically mounted to a shared persistent Docker volume on EFS. The hash of the commit that triggered the current execution serves as the directory name for the source code, which prevents naming conflicts and enables pipeline executions from separate commits or services to occur in parallel. If two commits cause two concurrent pipeline executions, the files generated by either execution will not interfere with one another.
 
 ![Efs](/img/case-study/section-12/efs.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+We also considered block storage. Although block storage presented some performance advantages, it was designed to be accessed from a singular virtual machine, making it unsatisfactory for our distributed task containers that were running across multiple VMs.
+
+#### Integration Testing
+
+Earlier, we presented integration testing as a key testing strategy for microservice architectures, where multiple microservices are tested together as a whole subsystem. To show an example, let’s examine two methods for performing integration tests for a new version of Service A against the latest versions of Service B and C.
+
+One option is to test the new Service A against live, production instances of Service B and C, but this approach has a major drawback: any destructive calls made during testing could unintentionally alter the production system's state or affect its performance.
+
+Another approach is to spin up instances of Service B and C in an isolated test environment. Despite added complexity and additional resource requirements, this approach avoids the risks of interfering with production instances of services.
 
 ![Test vs prod environment](/img/case-study/section-12/test-vs-prod-environment.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+To accomplish this, we leveraged Docker Compose, a service that facilitates container management and networking. The user provides a Docker Compose configuration file that specifies the dependency services required to run integration tests for Service A. During the integration testing phase, Docker Compose pulls the latest versions of the dependency services from a container registry and runs the integration tests.
+
+This approach offers several benefits, including the ability to test in an environment that closely mirrors production and avoiding the risk of inadvertently affecting live data. Moreover, it aligns with the user's existing workflow if they already use Docker Compose for local testing.
 
 ![Integration test](/img/case-study/section-12/integration-test.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+So far, we have focused on tasks that occur pre-deployment. Now we will dive into tasks directly related to deploying services.
+
+### Improvements to Deployment-Related Tasks
 
 ![Architecture improved simplified deployment](/img/case-study/section-12/architecture-improved-simplified-deployment.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#### Manual Approval of Staging Environments
+
+Most of Seamless’s pipeline executes in a fully automated fashion. However, most CI/CD workflows do not embrace full continuous deployment, so Seamless provides an optional staging environment from which the user could manually approve deployment to production.
+
+There were two patterns we could use to link stages to one another:
+
+1. Proceed immediately to the next stage after one stage completes
+2. Pause after a stage completes
+
+AWS Step Functions offers two analogous job invocation styles: “Synchronous” and “Wait for a Callback Token”. The Synchronous model was suitable for most stages because each stage should automatically start after the previous one finishes. However, if the user disables continuous deployment, the state machine should pause so the developer can perform quality checks on the staging environment. This second scenario was a good use case for Step Function’s Wait for a Callback Token pattern.
 
 ![Manual approval](/img/case-study/section-12/manual-approval.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Even if a staging environment is used, there is still a possibility of faulty code reaching production. For this reason, we decided to implement rollbacks.
+
+#### Rollbacks
+
+New and small companies often prioritize speedy code releases, which can carry the risk of introducing errors or failures in the production environment. Rollbacks allow teams to restore a previous stable version of a service.
+
+To enable rollbacks, we tag all Docker images with the git commit hash. Our UI displays all possible rollback images, giving users a choice of rollback targets. Instead of redeploying the entire system for a given rollback, each service can be rolled back independently, minimizing the impact on the overall deployment.
 
 ![Rollbacks](/img/case-study/section-12/rollbacks.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#### Automatic Deployment of Fargate Clusters
+
+Since Seamless is targeted toward smaller teams that might lack experience deploying microservices, we built a feature that automatically deploys the user’s Docker images to a Fargate Cluster and implements service discovery using AWS Service Connect. This approach helps users get their services up and running in production quickly, as they only need to provide basic information about their service and its image. The feature can be used to set up both staging and production environments.
+
+At this point, our core architecture looked like this:
 
 ![Architecture improved detailed](/img/case-study/section-12/architecture-improved-detailed.png)
 
+With our core functionality in place, we made Seamless a complete application by considering performance and scalability, security, notifications, and logging.
+
 ## 13. Beyond the Core Pipeline
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+There were a few additional infrastructural considerations and features remaining for us to review. Infrastructurally, we wanted to make Seamless more performant, scalable, and secure. We also wanted to add features that would make it easier for the user to monitor their pipeline, including notifications and log streaming.
+
+### Designing for Performance and Scale
+
+Even though Seamless is designed for smaller companies, we designed our infrastructure to support the growth of such companies, whether it be adding more microservices or hiring more developers and making more commits. For instance, we evaluated the possibility of many changes being made to many microservices at once. Consider a scenario where ten microservices each initiate five new pull requests simultaneously; in such a case, Seamless's infrastructure would have to contend with managing fifty concurrent pipeline executions. To tackle this challenge, we developed Seamless to manage high volumes of pipeline executions.
+
+#### Parallel Execution of State Machines
+
+Firstly, Seamless enables parallel execution of state machines by utilizing separate instances of AWS Step Functions. This allows for concurrent execution, enabling different microservices to use the shared pipeline simultaneously.
 
 ![Parallel execution](/img/case-study/section-13/parallel-execution.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#### Serverless Backend
+
+Seamless’s backend processes all status updates and logs generated by the pipeline. If there are many concurrent pipeline runs, the backend server could receive a high load of logs and status updates. As a result, we host our containerized backend on AWS’s serverless container engine, ECS Fargate to spin up as many containers as needed in response to demand, without sacrificing performance. We set up a load balancer to evenly distribute traffic among these containers.
 
 ![Serverless backend](/img/case-study/section-13/serverless-backend.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Basic Security
+
+#### OAuth
+
+Seamless needs secure access to the user’s Github account to perform authorized actions, such as configuring webhooks and cloning their private repositories. To avoid exposing user credentials to Seamless, Seamless retrieves an access token using Github’s OAuth implementation. The flow looks like this:
+
+1. When a user logs in to Seamless, they authenticate with Github, which sends back a temporary code.
+2. The user (client) passes that code to Seamless’s backend, which proxies the code to GitHub.
+3. Github responds with an access token, which Seamless’s backend sends to the client.
+
+The access token generated during the OAuth flow can then be used by Seamless’s backend to:
+
+1. Configure webhooks on the user’s behalf.
+2. Clone the user’s repositories during state machine execution.
 
 ![Oauth flow](/img/case-study/section-13/oauth-flow.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#### Private Subnets
+
+We also wanted to prevent direct network access to Seamless’s infrastructure, aside from its public-facing API. As a result, we provisioned most of Seamless’s infrastructure in private subnets so they can’t accept incoming network traffic. In case a developer needs to interact with resources in private subnets, such as their relational database or Redis cache, we deploy a bastion host in a public subnet that a developer can SSH into.
 
 ![Private subnet](/img/case-study/section-13/private-subnet.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Next, let’s look into a few ways Seamless assists in monitoring pipeline executions.
+
+### Logging
+
+If a developer or maintainer were deploying their application manually, they would be able to see logs output from their commands in realtime. For an automated CI/CD pipeline, displaying logs to the user is key to proactively monitoring problems, resolving build and deployment failures, and analyzing test reports.
+
+To integrate logging into Seamless, we first needed a system to capture logs from all task containers. We sought a storage mechanism capable of quickly processing large volumes of logs, and so decided to use a Redis cache (specifically, AWS ElastiCache) due to its high-speed, in-memory data storage capabilities.
+
+We needed to display logs in chronologically sorted order. As a result, we decided to use sorted sets to insert logs in sorted order, eliminating the need for sorting when reading logs. Incoming log streams are sent over WebSockets to the dashboard, where they are finally displayed.
 
 ![Logging service](/img/case-study/section-13/logging-service.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### Notifications
+
+Engineering teams need to stay up-to-date with pipeline execution and quickly address any issues that arise. While users could already monitor their pipeline through the dashboard, we also added notification functionality to Seamless. Seamless offers integration with AWS Simple Notification Service (SNS), allowing for notifications to be sent via email, Slack, and PagerDuty.
 
 ![Notifications](/img/case-study/section-13/notifications.png)
 
-## 14. Future Work
+## 14. Conclusion & Future Work
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Now that we’ve discussed Seamless’s architecture in depth, let’s put it all together:
+
+1. When the source code is updated, GitHub sends a webhook to an API Gateway.
+2. An Express.js backend running in an ECS Fargate cluster receives the webhook through an HTTP API Gateway.
+3. The backend retrieves pipeline information from a PostgreSQL database and sends it to the state machine to initiate the pipeline.
+4. The state machine executes each pipeline task in a container in ECS, which can share data via a mounted volume on Elastic File System (EFS) and access the Elastic Container Registry for pushing or pulling required images.
+5. The updated source code is deployed to staging and production Fargate clusters.
+
+During the pipeline run, the state machine sends status updates to the backend for storage in the database, and to users via SNS. The task containers send logs to the backend to be inserted into a Redis log cache. The backend sends both status updates and logs to the frontend dashboard via a WebSockets connection maintained by the API Gateway.
 
 ![Architecture final](/img/case-study/section-14/architecture-final.png)
+
+We narrowed down the scope of Seamless for Node-based containerized microservices running on ECS Fargate with similar build, test, and deployment requirements. However, going forward, there are additional features we would like to include and improvements we would like to make to our current implementation.
+
+### Future Work
+
+Seamless could be improved to support more use cases and offer more functionality. Some features we would like to explore are:
+
+- Additional microservice-specific testing options.
+- Expanding deployment options beyond ECS Fargate.
+- Supporting microservices not built using Node.js.
+- Caching dependencies between pipeline executions.
+
+Thank you for taking the time to read our case study!
 
 ## References
 
