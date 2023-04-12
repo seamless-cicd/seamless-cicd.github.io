@@ -24,7 +24,7 @@ const team = [
     website: 'https://github.com/RDeJonghe',
     github: 'https://github.com/RDeJonghe',
     linkedin: 'https://github.com/RDeJonghe',
-    email: 'ryan.paul.dejonghe@gmail.com',
+    email: 'ryandej@proton.me',
   },
 ];
 
