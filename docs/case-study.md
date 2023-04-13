@@ -300,7 +300,7 @@ Now that the pipeline is running, the user might want to view its progress.
 
 Seamless’s UI displays live updates of both runs and stages, enabling users to stay informed of pipeline outcomes as runs and stages transition from “Idle” to “In Progress”, and ultimately to “Success” or “Failure”. Log data is updated live, making it easier to identify and troubleshoot errors when they occur.
 
-_**(GIF of live status updates here)**_
+![Pipeline run](/img/gifs/pipeline-run-798w.gif)
 
 We will now shift the discussion toward the technical challenges we faced when building Seamless.
 
