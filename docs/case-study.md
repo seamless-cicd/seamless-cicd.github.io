@@ -37,11 +37,11 @@ One of the central issues with manual deployments is that they are time-consumin
 
 Firstly, there is usually a delay between the request for deployment and the start of the deployment. New commits sit idle in version control until the team responsible for deployment kicks off the deployment process. In some cases, developers must notify of new changes well before deployment dates. For example, TrueCar’s manual deployment strategy involved “Change Management tickets”, which each team had to file eight days before deployment.[^2]
 
-![Manual deployment delay](/img/case-study/section-2/manual-deployment-delay.png)
+![Manual deployment delay](/img/case-study/section-02/manual-deployment-delay.png)
 
 Once the deployment process commences, sometimes a long series of manual tasks are required to bring the code to production. This includes running scripts, checking code quality, and monitoring progress.[^3] If there are multiple teams responsible for different parts of the deployment process, they need to coordinate their efforts, causing additional delays.
 
-![Waterfall delays](/img/case-study/section-2/waterfall-delays.png)
+![Waterfall delays](/img/case-study/section-02/waterfall-delays.png)
 
 #### Reliability
 
@@ -49,7 +49,7 @@ The second major pitfall of manual deployments is that they are error-prone. Fir
 
 In addition to inconsistent administration of deployment steps, manual deployments are often run from inconsistent environments. Traditionally, manual deployments do not utilize a centralized system to build, test, and deploy developers' code. Instead, developers build and test applications on their local machines, each potentially having operating systems and environments that are different from one another and, by extension, the production environment.[^4] As a result, the application may function correctly when a developer tests it locally, but not in production.
 
-![Without build server](/img/case-study/section-2/without-build-server.png)
+![Without build server](/img/case-study/section-02/without-build-server.png)
 
 Still, there are some useful aspects to traditional manual deployment processes. For example, requiring human intervention can be a useful safety check against deploying buggy or low-quality code.
 
@@ -61,11 +61,11 @@ Over time, many companies began to introduce automation into their deployment pr
 
 The automation starts with version control. In automated deployments, version control systems are more than code storage locations: they plug directly into deployment pipelines. When a commit is made to a repository, the version control system can automatically trigger the deployment pipeline. This eliminates delays between deployment requests and pipeline initiation.
 
-![Manual vs automated deployment](/img/case-study/section-2/manual-vs-automated-deployment.png)
+![Manual vs automated deployment](/img/case-study/section-02/manual-vs-automated-deployment.png)
 
 Deployment pipelines that fully automate all steps from source through production can drastically shorten the time between release cycles. For example, once TrueCar switched to a fully automated pipeline, they transitioned from a “burdensome weekly release cycle to deploying code up to 100 times per week”.[^5]
 
-![Fast release cycle](/img/case-study/section-2/fast-release-cycle.png)
+![Fast release cycle](/img/case-study/section-02/fast-release-cycle.png)
 
 #### Reliability
 
@@ -73,7 +73,7 @@ Automated deployment processes also ensure greater reliability by eliminating th
 
 Moreover, deployment pipelines address the environmental inconsistency issues found in classic manual deployments. They typically use dedicated machines, like a **build server**, to automatically carry out pipeline jobs. This eliminates the "it works on my machine" syndrome that is all too common in traditional manual deployments. If the code doesn’t work on the build server, it won't make it to production.
 
-![With build server](/img/case-study/section-2/with-build-server.png)
+![With build server](/img/case-study/section-02/with-build-server.png)
 
 While automated deployment pipelines offer many advantages, transitioning from manual to automated deployments can be difficult. Resistance to change and extensive planning are common hurdles for many companies,[^6] and setting up deployment pipelines can be complex and demanding, as we’ll see later.
 
@@ -87,7 +87,7 @@ As a whole, CI/CD refers to the process of _continuously_ integrating code chang
 2. **Continuous Delivery (CD)** extends upon continuous integration by continuously taking the new build and preparing it for release.[^7]
 3. **Continuous Deployment** is the hallmark of a well-established CI/CD system: builds are immediately released into production.[^8]
 
-![Ci cd cd](/img/case-study/section-3/ci-cd-cd.png)
+![CI CD CD](/img/case-study/section-03/ci-cd-cd.png)
 
 ### Stages of a CI/CD Pipeline
 
@@ -101,7 +101,7 @@ A deployment pipeline is essential for delivering code changes from development 
 
 4. The **Deployment** stage pushes the built artifact to one or more environments. Typically, this includes a Staging (Pre-Production) environment used by QA teams to review the application and give approval, as well as a Production environment that is accessible to end users and represents the final outcome of the deployment process. Examples of deployment destinations are Amazon Web Services (AWS) Fargate and Google Cloud Run.
 
-![Pipeline stages](/img/case-study/section-3/pipeline-stages.png)
+![Pipeline stages](/img/case-study/section-03/pipeline-stages.png)
 
 Most deployment pipelines incorporate the stages outlined above. However, as companies adopt continuous integration, delivery, and deployment practices to different extents, they must consider a new tradeoff: how to balance safety with velocity.
 
@@ -111,17 +111,17 @@ Practitioners of automated deployment usually need to make a tradeoff. A highly 
 
 1. **Branching Strategy**: Traditional feature branching workflows such as Github Flow prioritize safety by reducing the risk of untested code being pushed to main. In contrast, trunk-based development prioritizes speed by encouraging direct commits to main.[^11] However, if a bug is introduced in a trunk-based development workflow, it may necessitate a rollback to restore the code to its previous state.
 
-![Branching strategies](/img/case-study/section-4/branching-strategies.png)
+![Branching strategies](/img/case-study/section-04/branching-strategies.png)
 
 2. **Merging Strategy**: Deployment workflows can either automate the merging of pull requests when it passes status checks or require a manual merging process by a team member. Although auto-merging can speed up the pipeline, it introduces the risk of merging code that has not undergone adequate testing and review.
 
-![Auto merge](/img/case-study/section-4/auto-merge.png)
+![Auto merge](/img/case-study/section-04/auto-merge.png)
 
 3. **Staging Environment**: Teams continuously deploy code to production or first deploy to a staging environment. In the case of continuous deployment, code that passes status checks is deployed straight to production without manual approval. This allows teams to deliver updates to end users quickly but increases the likelihood that production-time adjustments may need to be performed, such as rolling back to a previous deployment.
 
 To summarize, companies can enhance the speed of their CI/CD pipeline by implementing a trunk-based development workflow, automating code merging, and continuously deploying code. Alternatively, they can improve deployment safety by following a feature-branch workflow, mandating human code reviews before merging, and deploying to a staging environment before deploying to production.
 
-![Safety velocity spectrum](/img/case-study/section-4/safety-velocity-spectrum.png)
+![Safety velocity spectrum](/img/case-study/section-04/safety-velocity-spectrum.png)
 
 While CI/CD pipelines can be adapted to meet different goals in terms of speed and safety, they can also be adapted to support different application architectures, such as monoliths and microservices.
 
@@ -137,13 +137,13 @@ For monoliths, the entire codebase is packaged into a single executable file or 
 
 Consider three services: a Payment, Inventory, and Notification Service. Deployments of each service could take place on different days of the week:
 
-![Releasing microservices](/img/case-study/section-5/releasing-microservices.png)
+![Releasing microservices](/img/case-study/section-05/releasing-microservices.png)
 
 ### Different Communication Methods
 
 All components of a monolith run within the same application. As a result, the application’s modules **communicate with function calls**. In contrast, microservices **communicate remotely with network calls** (e.g. using HTTP). Unlike function calls, which are fast and reliable, network calls are susceptible to latency and unreliability. As we’ll discuss in a bit, these varying communication styles influence testing techniques for a CI/CD pipeline.
 
-![Monolith microservices](/img/case-study/section-5/monolith-microservices.png)
+![Monolith microservices](/img/case-study/section-05/monolith-microservices.png)
 
 The distinct traits of microservices have implications for their CI/CD pipelines. Two defining characteristics of microservice architectures are their independent deployments and network-based communication methods. These two characteristics introduce two corresponding challenges for microservice-based CI/CD pipelines: managing pipelines for many microservices and conducting inter-service testing across the network.
 
@@ -157,7 +157,7 @@ In this section, we’ll explore the specific challenges faced by CI/CD pipeline
 
 One approach to fully decoupling microservice deployments is to attach an individual CI/CD pipeline to each service. Since microservice teams are usually autonomous, it is common for teams to build their own pipelines. This gives each team full control of the pipeline and its stages.
 
-![Many pipelines](/img/case-study/section-6/many-pipelines.png)
+![Many pipelines](/img/case-study/section-06/many-pipelines.png)
 
 However, this many-pipeline approach adds complexity. There are multiple pipelines to maintain, along with their associated YAML files, scripts, and library versions. For example, when Expedia experienced an “explosion in the number of CI/CD pipelines”, the engineering teams found that they were “constantly needing to update” the pipelines for each microservice.[^14]
 
@@ -169,7 +169,7 @@ To ease the burden of managing deployment pipelines for tens or hundreds of micr
 
 One solution for modularizing CI/CD pipelines across microservices is to reuse steps for different microservice pipelines. These shared steps could come in the form of shell scripts, reusable Docker images, repositories or libraries, or YAML templates.
 
-![Shared segments](/img/case-study/section-6/shared-segments.png)
+![Shared segments](/img/case-study/section-06/shared-segments.png)
 
 This approach can help eliminate redundancies across pipelines, keeping them “DRY”.[^17] Shared libraries prove particularly useful for microservices that have distinct deployment requirements but still share some common elements like utility functions and customized steps.
 
@@ -181,7 +181,7 @@ Let’s look at a different strategy that mitigates some of these complications.
 
 The former approach assumes that each microservice must have its own dedicated CI/CD pipeline. An alternative approach is to create a single, reusable, parameterized pipeline that is passed context whenever it is executed. This means that the pipeline is flexible: instead of linking pipelines to fixed repository URLs, testing commands, and configuration file entry points, these values can be configurable for each service. Adding a new microservice to the pipeline is simply a matter of filling in these parameters.[^19]
 
-![Shared pipeline](/img/case-study/section-6/shared-pipeline.png)
+![Shared pipeline](/img/case-study/section-06/shared-pipeline.png)
 
 While this single-pipeline approach can simplify building and maintaining CI/CD pipelines, it may not be the best fit for every team. To make it work, there must be a certain degree of uniformity in terms of how each service is built, tested, and deployed. For example, every microservice might need to be deployed to the same Kubernetes cluster. For microservices with more heterogeneous deployment requirements, a different approach may be needed.
 
@@ -197,13 +197,13 @@ There are several techniques available for testing at different levels of granul
 
 1. **Unit Testing** involves testing atomic units of a single service, such as its functions or classes, without relying on other services. However, it does not verify the interactions between services. Any services required for a unit test are mocked.
 
-![Unit mock testing](/img/case-study/section-6/unit-mock-testing.png)
+![Unit mock testing](/img/case-study/section-06/unit-mock-testing.png)
 
 2. **Integration Testing** involves making network calls to test multiple services functioning together as a single subsystem. This technique may not be as precise as unit testing, but it can validate the larger behavior of whole subsystems. Integration Testing does not typically test the system as a whole.
 
 3. **On-Demand Staging Environments** replicate production conditions and include all the microservices in the system. Although not a formal testing strategy, developers can use staging environments to test the system end-to-end, without getting bogged down in the details of each service and inter-service communications. However, staging environments can be resource-intensive.
 
-![Integration vs staging testing](/img/case-study/section-6/integration-vs-staging-testing.png)
+![Integration vs staging testing](/img/case-study/section-06/integration-vs-staging-testing.png)
 
 In practice, a comprehensive testing strategy will usually incorporate a combination of these testing strategies in order to increase confidence and test coverage.
 
@@ -213,7 +213,7 @@ Development teams using a manual deployment process for microservices might be l
 
 Building a CI/CD pipeline from scratch can be time-consuming and difficult, especially if it needs to handle the inherent complexities of a microservices architecture. Smaller teams with limited experience with cloud infrastructure and automation may struggle to architect a robust pipeline. They might also lack the staff and expertise to maintain and optimize it. The following is an example list of tasks for setting up a pipeline on AWS (we definitely don’t expect you to read everything, though you’re welcome to).
 
-![Building-a-pipeline](/img/case-study/section-7/building-a-pipeline.png)
+![Building-a-pipeline](/img/case-study/section-07/building-a-pipeline.png)
 
 Instead of investing significant time and effort into this project, teams may choose to leverage existing CI/CD solutions to simplify the process.
 
@@ -253,7 +253,7 @@ Our solution would make managing the deployment of multiple microservices easier
 
 Furthermore, unlike most commercial products, our solution would be open-source and fully self-hosted, allowing for complete control of code and data ownership. Lastly, it would provide options for testing and inspecting microservices at different levels of granularity.
 
-![Comparison chart](/img/case-study/section-8/comparison-chart.png)
+![Comparison chart](/img/case-study/section-08/comparison-chart.png)
 
 ## 9. Introducing Seamless
 
@@ -270,7 +270,7 @@ In order to install and deploy Seamless a user must have:
 
 To install the Seamless CLI, the user runs `npm install -g @seamless-cicd/seamless`. Global installation is required. Next, running `seamless init` will guide this person through a series of inputs needed to deploy Seamless. After completing the initialization process, executing `seamless deploy` will provision Seamless's infrastructure on AWS and provide a URL to access the platform's dashboard.
 
-![Cli commands](/img/case-study/section-9/cli-commands.png)
+![Cli commands](/img/case-study/section-09/cli-commands.png)
 
 ### Using Seamless
 
@@ -292,7 +292,7 @@ Now the pipeline is ready to be activated. It can be triggered manually or by th
 2. A commit is made on a pull request (PR Sync)
 3. A pull request is merged (Commit to Main)
 
-![Pipeline triggers](/img/case-study/section-9/pipeline-triggers.png)
+![Pipeline triggers](/img/case-study/section-09/pipeline-triggers.png)
 
 Now that the pipeline is running, the user might want to view its progress.
 
