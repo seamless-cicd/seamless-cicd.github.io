@@ -10,9 +10,15 @@
  * work well for content-centric websites.
  */
 
-svg {
-  shape-rendering: auto;
+ /* Center and add margin to top/bottom of diagrams */
+ article > div.theme-doc-markdown.markdown img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
 }
+
 
 ul.table-of-contents li {
   font-size: 1rem;
