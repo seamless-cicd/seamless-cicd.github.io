@@ -24,7 +24,7 @@ const team = [
     image: 'ryan.png',
     website: 'https://github.com/RDeJonghe',
     github: 'https://github.com/RDeJonghe',
-    linkedin: 'https://github.com/RDeJonghe',
+    linkedin: 'https://www.linkedin.com/in/ryan-dejonghe-50a822272/',
     email: 'ryandej@proton.me',
   },
 ];
