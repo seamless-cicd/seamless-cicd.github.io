@@ -2,9 +2,11 @@
 title: Case Study
 ---
 
+import HeaderLine from '@site/src/components/HeaderLine.tsx';
+
 # Case Study
 
-<div className="max-w-xs w-screen h-[2px] bg-gradient-to-r from-transparent from-10% from-indigo-700 from-20% via-indigo-600 via-40% to-indigo-900 to-60% to-transparent"></div>
+<HeaderLine />
 
 ## Problem Domain
 
@@ -261,7 +263,7 @@ Furthermore, unlike most commercial products, our solution would be open-source 
 
 ## Seamless
 
-### 9. Introducing Seamless
+### 1. Introducing Seamless
 
 Seamless is an open-source CI/CD pipeline tool designed specifically for containerized microservices deployed to AWS Elastic Container Service (ECS) Fargate. It offers a user-friendly interface that is similar to many of the popular interfaces found in commercial solutions. Unlike other CI/CD pipelines, Seamless does not require user-defined scripting through a YAML file template for configuration. Instead, Seamless relies on a core set of default stages: Prepare, Code Quality, Unit Test, Build, Integration Test, Deploy to Staging, and Deploy to Production. This approach makes Seamless easy to use right out of the box. Through the interface, users simply provide the necessary commands needed to run each stage. In the following sections, we will explore the steps a user takes to install, set up, and run Seamless’s CI/CD pipeline on their microservices.
 
@@ -310,7 +312,7 @@ Seamless’s UI displays live updates of both runs and stages, enabling users to
 
 We will now shift the discussion toward the technical challenges we faced when building Seamless.
 
-### 10. Architecture Overview
+### 2. Architecture Overview
 
 We’ll start with the fundamental challenges we had to address, provide a high-level overview of our core architecture, and then dive deeper into design decisions and tradeoffs.
 
@@ -331,7 +333,7 @@ After some initial prototyping, we arrived at the architecture below, which show
 
 With an overall direction in mind, we decided to explore different options for each component of our core architecture.
 
-### 11. Building the Core Pipeline Functionality
+### 3. Building the Core Pipeline Functionality
 
 #### Modeling and Storing Data
 
@@ -452,7 +454,7 @@ Ultimately we settled on the following implementation for our core architecture:
 
 Once we had built the structural foundation for the pipeline, we looked to expand our project further.
 
-### 12. Improving Core Functionality
+### 4. Improving Core Functionality
 
 Once Seamless’ core functionality was working, users were able to automatically test, build, and deploy their microservices upon changes in version control. With our core pipeline in place, we decided to add features to make our CI/CD pipeline more robust and targeted toward microservices. Below is a more detailed diagram of our architecture, with improved functionality in place:
 
@@ -533,7 +535,7 @@ At this point, our core architecture looked like this:
 
 With our core functionality in place, we made Seamless a complete application by considering performance and scalability, security, notifications, and logging.
 
-### 13. Beyond the Core Pipeline
+### 5. Beyond the Core Pipeline
 
 There were a few additional infrastructural considerations and features remaining for us to review. Infrastructurally, we wanted to make Seamless more performant, scalable, and secure. We also wanted to add features that would make it easier for the user to monitor their pipeline, including notifications and log streaming.
 
@@ -594,7 +596,7 @@ Engineering teams need to stay up-to-date with pipeline execution and quickly ad
 
 ![Notifications](/img/case-study/section-13/notifications.png)
 
-### 14. Conclusion & Future Work
+### 6. Conclusion & Future Work
 
 Now that we’ve discussed Seamless’s architecture in depth, let’s put it all together:
 
