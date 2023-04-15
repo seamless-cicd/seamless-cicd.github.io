@@ -33,6 +33,10 @@ export default function Team() {
     <Layout title="The Team" description="The Team">
       <div className="mx-auto w-full max-w-4xl px-8 py-8 text-center sm:py-24">
         <h1 className="text-[32px] sm:text-5xl">The Team</h1>
+        <div className="flex justify-center">
+          <div className="h-[2px] w-screen max-w-xs bg-gradient-to-r from-indigo-700 from-transparent from-10% from-20% via-indigo-600 via-40% to-indigo-900 to-transparent to-60%"></div>
+        </div>
+
         <p className="mx-auto mb-0 mt-4 max-w-prose text-lg sm:mt-8 sm:text-2xl">
           We are searching for software engineering positions. Please reach out
           to discuss how our skills can bring value to your team.
