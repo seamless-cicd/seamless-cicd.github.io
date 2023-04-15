@@ -2,13 +2,13 @@
 title: Case Study
 ---
 
-# Case Study
+## Problem Domain
 
-## 1. Introduction
+### 1. Introduction
 
 Seamless is an open-source, low-configuration CI/CD (Continuous Integration and Continuous Delivery/Deployment) framework that streamlines the development and deployment of containerized microservice applications. It automates the building, testing, and deployment of code, enabling developers to deliver software quickly and reliably. Seamless links multiple microservices to a single shared pipeline, eliminating the need to maintain a separate pipeline per service. Throughout this case study, we’ll explore how the deployment process has evolved over time, the role of CI/CD, and how we designed Seamless to support our desired use case.
 
-## 2. Evolution of Deployment Processes
+### 2. Evolution of Deployment Processes
 
 A **deployment process** refers to the steps required to make an application accessible to end users. Companies typically care about their deployment process because it impacts:
 
@@ -17,13 +17,13 @@ A **deployment process** refers to the steps required to make an application acc
 
 The deployment process is initiated with a change in the source code and advances through building, testing, and deploying the code. Most modern companies manage source code through a version control system or VCS.
 
-### Version Control Systems
+#### Version Control Systems
 
 **Version control systems (VCS)** such as Git enable developers to collaborate on a single, centralized repository.[^1] By creating branches, developers can work on changes independently. After a change is complete, it is typically merged into a central branch called main or master. This is where the deployment process begins.
 
 While most deployment processes utilize a version control system, the path from version control to deployment can be either **manual** or **automatic**.
 
-### Traditional Manual Deployment Processes
+#### Traditional Manual Deployment Processes
 
 A manual deployment process consists of human-executed steps, like updating configuration files, copying files to production environments, and restarting servers.
 
@@ -53,7 +53,7 @@ In addition to inconsistent administration of deployment steps, manual deploymen
 
 Still, there are some useful aspects to traditional manual deployment processes. For example, requiring human intervention can be a useful safety check against deploying buggy or low-quality code.
 
-### Automated Deployment Processes
+#### Automated Deployment Processes
 
 Over time, many companies began to introduce automation into their deployment process. An automated deployment process is commonly called a deployment pipeline. A deployment pipeline runs in a repeatable, consistent manner, resulting in faster and more reliable deployments.
 
@@ -79,7 +79,7 @@ While automated deployment pipelines offer many advantages, transitioning from m
 
 When introducing automation into their deployment processes, companies are typically striving to meet at least one of the following objectives: continuous integration, continuous delivery, and continuous deployment.
 
-## 3. CI/CD Pipelines
+### 3. CI/CD Pipelines
 
 As a whole, CI/CD refers to the process of _continuously_ integrating code changes into a central repository and moving them closer to production. CI/CD can be broken down into a few parts.
 
@@ -89,7 +89,7 @@ As a whole, CI/CD refers to the process of _continuously_ integrating code chang
 
 ![CI CD CD](/img/case-study/section-03/ci-cd-cd.png)
 
-### Stages of a CI/CD Pipeline
+#### Stages of a CI/CD Pipeline
 
 A deployment pipeline is essential for delivering code changes from development to production. Although there is no one-size-fits-all pipeline, they are typically broken up into four stages:[^9]
 
@@ -105,7 +105,7 @@ A deployment pipeline is essential for delivering code changes from development 
 
 Most deployment pipelines incorporate the stages outlined above. However, as companies adopt continuous integration, delivery, and deployment practices to different extents, they must consider a new tradeoff: how to balance safety with velocity.
 
-## 4. Balancing Safety and Velocity
+### 4. Balancing Safety and Velocity
 
 Practitioners of automated deployment usually need to make a tradeoff. A highly automated process gets code to production fast, but it may increase the likelihood of bugs entering production. On the flip side, a safer deployment process with more manual checks can reduce velocity. Teams can make a number of decisions to optimize the location of their deployment pipeline on a spectrum of balancing safety with velocity.
 
@@ -125,13 +125,13 @@ To summarize, companies can enhance the speed of their CI/CD pipeline by impleme
 
 While CI/CD pipelines can be adapted to meet different goals in terms of speed and safety, they can also be adapted to support different application architectures, such as monoliths and microservices.
 
-## 5. CI/CD for Monoliths and Microservices
+### 5. CI/CD for Monoliths and Microservices
 
 There is no universal CI/CD pipeline that suits every scenario. To understand why CI/CD pipelines vary for monoliths and microservices, we must examine a few fundamental differences between the two.
 
 A monolith is a single unit containing tightly-coupled components. A microservices architecture consists of independent, loosely coupled services distributed across the network. The monolith has historically been the dominant approach to building applications, but this has shifted toward microservices out of a need for agility and scalability. To understand how CI/CD pipelines differ for monoliths and microservices, we will first explore the differences in the architectures themselves.
 
-### Different Deployment Methods
+#### Different Deployment Methods
 
 For monoliths, the entire codebase is packaged into a single executable file or directory that is deployed to production.[^12] In contrast, microservices are deployed as smaller, independent units.[^13] Due to their size, microservices can be packaged, tested, and deployed much more efficiently than a monolith, enabling small, frequent updates to be made. Furthermore, microservices are fully decoupled so each service can be deployed on its own schedule without impacting the others.
 
@@ -139,7 +139,7 @@ Consider three services: a Payment, Inventory, and Notification Service. Deploym
 
 ![Releasing microservices](/img/case-study/section-05/releasing-microservices.png)
 
-### Different Communication Methods
+#### Different Communication Methods
 
 All components of a monolith run within the same application. As a result, the application’s modules **communicate with function calls**. In contrast, microservices **communicate remotely with network calls** (e.g. using HTTP). Unlike function calls, which are fast and reliable, network calls are susceptible to latency and unreliability. As we’ll discuss in a bit, these varying communication styles influence testing techniques for a CI/CD pipeline.
 
@@ -147,11 +147,11 @@ All components of a monolith run within the same application. As a result, the a
 
 The distinct traits of microservices have implications for their CI/CD pipelines. Two defining characteristics of microservice architectures are their independent deployments and network-based communication methods. These two characteristics introduce two corresponding challenges for microservice-based CI/CD pipelines: managing pipelines for many microservices and conducting inter-service testing across the network.
 
-## 6. CI/CD Challenges with Microservices
+### 6. CI/CD Challenges with Microservices
 
 In this section, we’ll explore the specific challenges faced by CI/CD pipelines for microservices.
 
-### Pipeline Management Difficulties
+#### Pipeline Management Difficulties
 
 #### The Many-Pipeline Problem
 
@@ -187,7 +187,7 @@ While this single-pipeline approach can simplify building and maintaining CI/CD 
 
 Along with issues of managing CI/CD pipelines for microservices, there are also unique challenges with testing microservices.
 
-### Microservice Testing Challenges
+#### Microservice Testing Challenges
 
 Testing microservices and their interactions is essential for ensuring that the system functions correctly, but it can be challenging due to their distributed nature.[^20] Unlike monolithic applications that run as a single entity, microservices are split across a network, so any tests that involve multiple services require making network calls. Consequently, testing strategies that were applied to monolithic applications may need to be reconsidered for microservices. Despite this challenge, it is crucial to test microservices in isolation, together, and as a whole system to ensure their proper functioning.
 
@@ -209,7 +209,7 @@ In practice, a comprehensive testing strategy will usually incorporate a combina
 
 Development teams using a manual deployment process for microservices might be looking to reap the benefits of automated deployments. One option development teams may consider is to build their own CI/CD pipeline
 
-## 7. Manually Building a CI/CD Pipeline for Microservices
+### 7. Manually Building a CI/CD Pipeline for Microservices
 
 Building a CI/CD pipeline from scratch can be time-consuming and difficult, especially if it needs to handle the inherent complexities of a microservices architecture. Smaller teams with limited experience with cloud infrastructure and automation may struggle to architect a robust pipeline. They might also lack the staff and expertise to maintain and optimize it. The following is an example list of tasks for setting up a pipeline on AWS (we definitely don’t expect you to read everything, though you’re welcome to).
 
@@ -217,11 +217,11 @@ Building a CI/CD pipeline from scratch can be time-consuming and difficult, espe
 
 Instead of investing significant time and effort into this project, teams may choose to leverage existing CI/CD solutions to simplify the process.
 
-## 8. Existing Solutions
+### 8. Existing Solutions
 
 Existing solutions typically fall into two categories: DIY solutions and commercial solutions.
 
-### DIY Solutions
+#### DIY Solutions
 
 For organizations with more complex CI/CD pipeline setups, DIY solutions might be the best fit. There are many free open-source DIY CI/CD tools such as Jenkins, Ansible, Gitlab, and Tekton. These tools offer a high level of customization and control, allowing the tool to be tailored to a specific use case. For example, Jenkins achieves this customizability through its extensive plugin library.[^22]
 
@@ -231,7 +231,7 @@ While DIY solutions like Jenkins and Tekton offer a high degree of customization
 
 While companies with CI/CD expertise might be equipped to build customized pipelines, less established teams might reach for a Software as a Service (SaaS) product to help manage their CI/CD needs.
 
-### Commercial Solutions
+#### Commercial Solutions
 
 There are various commercial CI/CD pipelines available such as Codefresh, Semaphore, CircleCI, and AWS CodePipeline. While not typically as flexible as open-source tools, these solutions do generally provide a degree of customization. For instance, YAML configuration files are commonly used to configure pipelines and their stages.
 
@@ -241,7 +241,7 @@ Some commercial CI/CD solutions provide microservice-specific testing solutions.
 
 Commercial solutions are not suitable for the CI/CD needs of all teams. They are typically not as extensible as open-source solutions, making them unsuitable for certain use cases. And despite being generally easier to use than DIY tools, they usually still require setting up and configuring pipelines.
 
-### A Solution for Our Use Case
+#### A Solution for Our Use Case
 
 We wanted to build a tool for a specific use case: companies with a lower employee count that have embraced a containerized, microservices approach, seeking an uncomplicated solution for managing their CI/CD pipelines across their microservices.
 
@@ -255,11 +255,13 @@ Furthermore, unlike most commercial products, our solution would be open-source 
 
 ![Comparison chart](/img/case-study/section-08/comparison-chart.png)
 
-## 9. Introducing Seamless
+## Seamless
+
+### 9. Introducing Seamless
 
 Seamless is an open-source CI/CD pipeline tool designed specifically for containerized microservices deployed to AWS Elastic Container Service (ECS) Fargate. It offers a user-friendly interface that is similar to many of the popular interfaces found in commercial solutions. Unlike other CI/CD pipelines, Seamless does not require user-defined scripting through a YAML file template for configuration. Instead, Seamless relies on a core set of default stages: Prepare, Code Quality, Unit Test, Build, Integration Test, Deploy to Staging, and Deploy to Production. This approach makes Seamless easy to use right out of the box. Through the interface, users simply provide the necessary commands needed to run each stage. In the following sections, we will explore the steps a user takes to install, set up, and run Seamless’s CI/CD pipeline on their microservices.
 
-### Installing Seamless
+#### Installing Seamless
 
 In order to install and deploy Seamless a user must have:
 
@@ -272,7 +274,7 @@ To install the Seamless CLI, the user runs `npm install -g @seamless-cicd/seamle
 
 ![Cli commands](/img/case-study/section-09/cli-commands.png)
 
-### Using Seamless
+#### Using Seamless
 
 After deploying Seamless’s infrastructure, the user can visit the dashboard and complete the pipeline setup process. They will provide the names of their production and staging environments (ECS clusters) so that Seamless knows where to deploy their microservices.
 
@@ -304,11 +306,11 @@ Seamless’s UI displays live updates of both runs and stages, enabling users to
 
 We will now shift the discussion toward the technical challenges we faced when building Seamless.
 
-## 10. Architecture Overview
+### 10. Architecture Overview
 
 We’ll start with the fundamental challenges we had to address, provide a high-level overview of our core architecture, and then dive deeper into design decisions and tradeoffs.
 
-### Fundamental Challenges
+#### Fundamental Challenges
 
 When building our initial prototype, we focused on the fundamental problems that needed to be solved in order to build the core functionality of a CI/CD pipeline:
 
@@ -317,7 +319,7 @@ When building our initial prototype, we focused on the fundamental problems that
 - Finding a mechanism to monitor and control the pipeline’s execution flow, with the ability to store complex state
 - Determining how and where to execute the physical steps of each pipeline stage
 
-### Core Architecture
+#### Core Architecture
 
 After some initial prototyping, we arrived at the architecture below, which shows the high-level flow of how a pipeline is triggered and executed. A backend server listens for webhooks from a code repository, retrieves pipeline information from a database, and starts the pipeline. The pipeline performs a series of tasks, including deploying the updated application to production.
 
@@ -325,9 +327,9 @@ After some initial prototyping, we arrived at the architecture below, which show
 
 With an overall direction in mind, we decided to explore different options for each component of our core architecture.
 
-## 11. Building the Core Pipeline Functionality
+### 11. Building the Core Pipeline Functionality
 
-### Modeling and Storing Data
+#### Modeling and Storing Data
 
 At the outset, we created a data model that served as the bedrock for the remainder of our application. It comprises four fundamental entities: Pipelines, Services, Runs, and Stages. As a reminder, smaller companies without dedicated teams for managing multiple disparate CI/CD pipelines can simplify their CI/CD management by using a single pipeline for multiple services. Subsequently, our data model establishes a one-to-many relationship between Pipelines and Services. Additionally, each Service can have many Runs and each Run can have many Stages.
 
@@ -337,7 +339,7 @@ At first, we considered using a NoSQL document store like DynamoDB to store our 
 
 With our data model in place, we narrowed in on how we could automate the journey of code from source to production.
 
-### Automating Pipeline Runs
+#### Automating Pipeline Runs
 
 A key component of automated deployment pipelines is their ability to execute immediately when source code is modified. Webhooks are used to link user repositories to the pipeline:
 
@@ -364,7 +366,7 @@ For pushes to the main branch, the entire pipeline is executed, whereas pull req
 
 With a system in place to trigger the pipeline, we moved on to building out the pipeline itself.
 
-### Managing Pipeline Execution
+#### Managing Pipeline Execution
 
 ![Architecture core simplified taskmanager](/img/case-study/section-11/architecture-core-simplified-taskmanager.png)
 
@@ -396,7 +398,7 @@ We also considered running the state machine directly on our backend servers, ut
 
 At this point, we had a tool that would help us manage pipeline tasks, but we also needed to consider how to run the tasks themselves.
 
-### Running Tasks
+#### Running Tasks
 
 ![Architecture core simplified taskexecutors](/img/case-study/section-11/architecture-core-simplified-taskexecutors.png)
 
@@ -433,7 +435,7 @@ Since Step Functions natively integrates with other AWS services, we could trigg
 
 ![Task containers](/img/case-study/section-11/task-containers.png)
 
-### Overview of Core Functionality
+#### Overview of Core Functionality
 
 Ultimately we settled on the following implementation for our core architecture:
 
@@ -446,13 +448,13 @@ Ultimately we settled on the following implementation for our core architecture:
 
 Once we had built the structural foundation for the pipeline, we looked to expand our project further.
 
-## 12. Improving Core Functionality
+### 12. Improving Core Functionality
 
 Once Seamless’ core functionality was working, users were able to automatically test, build, and deploy their microservices upon changes in version control. With our core pipeline in place, we decided to add features to make our CI/CD pipeline more robust and targeted toward microservices. Below is a more detailed diagram of our architecture, with improved functionality in place:
 
 ![Architecture improved simplified predeployment](/img/case-study/section-12/architecture-improved-simplified-predeployment.png)
 
-### Realtime Dashboard Updates
+#### Realtime Dashboard Updates
 
 In order to give the user the ability to detect and respond to pipeline issues as they occur, we implemented real-time updates that are sent to our dashboard.
 
@@ -460,7 +462,7 @@ We considered using client-side polling, where the client queries the API at reg
 
 ![Polling vs websockets](/img/case-study/section-12/polling-vs-websockets.png)
 
-### Improvements to Pre-Deployment Tasks
+#### Improvements to Pre-Deployment Tasks
 
 #### Sharing Data Among Containers
 
@@ -490,7 +492,7 @@ This approach offers several benefits, including the ability to test in an envir
 
 So far, we have focused on tasks that occur pre-deployment. Now we will dive into tasks directly related to deploying services.
 
-### Improvements to Deployment-Related Tasks
+#### Improvements to Deployment-Related Tasks
 
 ![Architecture improved simplified deployment](/img/case-study/section-12/architecture-improved-simplified-deployment.png)
 
@@ -527,11 +529,11 @@ At this point, our core architecture looked like this:
 
 With our core functionality in place, we made Seamless a complete application by considering performance and scalability, security, notifications, and logging.
 
-## 13. Beyond the Core Pipeline
+### 13. Beyond the Core Pipeline
 
 There were a few additional infrastructural considerations and features remaining for us to review. Infrastructurally, we wanted to make Seamless more performant, scalable, and secure. We also wanted to add features that would make it easier for the user to monitor their pipeline, including notifications and log streaming.
 
-### Designing for Performance and Scale
+#### Designing for Performance and Scale
 
 Even though Seamless is designed for smaller companies, we designed our infrastructure to support the growth of such companies, whether it be adding more microservices or hiring more developers and making more commits. For instance, we evaluated the possibility of many changes being made to many microservices at once. Consider a scenario where ten microservices each initiate five new pull requests simultaneously; in such a case, Seamless's infrastructure would have to contend with managing fifty concurrent pipeline executions. To tackle this challenge, we developed Seamless to manage high volumes of pipeline executions.
 
@@ -547,7 +549,7 @@ Seamless’s backend processes all status updates and logs generated by the pipe
 
 ![Serverless backend](/img/case-study/section-13/serverless-backend.png)
 
-### Basic Security
+#### Basic Security
 
 #### OAuth
 
@@ -572,7 +574,7 @@ We also wanted to prevent direct network access to Seamless’s infrastructure, 
 
 Next, let’s look into a few ways Seamless assists in monitoring pipeline executions.
 
-### Logging
+#### Logging
 
 If a developer or maintainer were deploying their application manually, they would be able to see logs output from their commands in realtime. For an automated CI/CD pipeline, displaying logs to the user is key to proactively monitoring problems, resolving build and deployment failures, and analyzing test reports.
 
@@ -582,13 +584,13 @@ We needed to display logs in chronologically sorted order. As a result, we decid
 
 ![Logging service](/img/case-study/section-13/logging-service.png)
 
-### Notifications
+#### Notifications
 
 Engineering teams need to stay up-to-date with pipeline execution and quickly address any issues that arise. While users could already monitor their pipeline through the dashboard, we also added notification functionality to Seamless. Seamless offers integration with AWS Simple Notification Service (SNS), allowing for notifications to be sent via email, Slack, and PagerDuty.
 
 ![Notifications](/img/case-study/section-13/notifications.png)
 
-## 14. Conclusion & Future Work
+### 14. Conclusion & Future Work
 
 Now that we’ve discussed Seamless’s architecture in depth, let’s put it all together:
 
@@ -604,7 +606,7 @@ During the pipeline run, the state machine sends status updates to the backend f
 
 We narrowed down the scope of Seamless for Node-based containerized microservices running on ECS Fargate with similar build, test, and deployment requirements. However, going forward, there are additional features we would like to include and improvements we would like to make to our current implementation.
 
-### Future Work
+#### Future Work
 
 Seamless could be improved to support more use cases and offer more functionality. Some features we would like to explore are:
 
@@ -615,7 +617,7 @@ Seamless could be improved to support more use cases and offer more functionalit
 
 Thank you for taking the time to read our case study!
 
-## References
+### References
 
 [^1]: https://www.cmswire.com/information-management/version-control-systems-the-link-between-development-and-deployment/
 [^2]: https://medium.com/driven-by-code/the-journey-to-ci-cd-b1872927c36b
