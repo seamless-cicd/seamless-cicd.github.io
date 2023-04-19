@@ -10,7 +10,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Seamless CI/CD',
-  tagline: 'Open-source CI/CD Pipeline for Containerized Microservices',
+  tagline:
+    'Open-source, low-config CI/CD pipeline for containerized microservices',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -74,10 +75,16 @@ const config = {
         { name: 'og:title', content: 'Seamless CI/CD' },
         { name: 'og:url', content: 'https://seamless-cicd.com/' },
         { name: 'og:image', content: 'https://seamless-cicd.com/img/og.jpg' },
-        { name: 'og:type', content: 'article' },
+        { name: 'og:type', content: 'website' },
+        {
+          name: 'og:image:alt',
+          content:
+            'Seamless CI/CD logo and tagline: Open-source, low-config CI/CD pipeline for containerized microservices',
+        },
         {
           name: 'og:description',
-          content: 'Open-source CI/CD Pipeline for Containerized Microservices',
+          content:
+            'Open-source, low-config CI/CD pipeline for containerized microservices',
         },
       ],
       tableOfContents: {
@@ -100,9 +107,8 @@ const config = {
             label: 'Case Study',
           },
           {
-            type: 'doc',
+            to: 'presentation',
             position: 'right',
-            docId: 'presentation',
             label: 'Presentation',
           },
           {

@@ -31,7 +31,10 @@ const team = [
 
 export default function Team() {
   return (
-    <Layout title="The Team" description="The Team">
+    <Layout
+      title="The Team"
+      description="The Seamless CI/CD Software Engineering Team"
+    >
       <div className="mx-auto w-full max-w-4xl px-8 py-8 text-center sm:py-24">
         <h1 className="mb-8 text-[32px] sm:text-5xl">The Team</h1>
         <div className="mt-5">

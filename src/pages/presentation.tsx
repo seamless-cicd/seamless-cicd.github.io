@@ -4,7 +4,10 @@ import HeaderLine from '../components/HeaderLine';
 
 export default function Presentation() {
   return (
-    <Layout title="Presentation" description="Presentation">
+    <Layout
+      title="Presentation"
+      description="Live Presentation of the Seamless CI/CD Project"
+    >
       <div className="mx-auto w-full max-w-4xl px-8 py-8 text-center sm:py-24">
         <h1 className="mb-8 text-[32px] sm:text-5xl">Presentation</h1>
         <div className="mb-10 mt-5">
