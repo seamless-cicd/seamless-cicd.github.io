@@ -14,9 +14,9 @@ const team = [
   {
     name: 'Jason Wang',
     image: 'jason.png',
-    website: 'https://github.com/jasonherngwang',
+    website: 'https://jasonherngwang.com',
     github: 'https://github.com/jasonherngwang',
-    linkedin: 'https://www.linkedin.com/in/jason-wang-p-e-159194b/',
+    linkedin: 'https://www.linkedin.com/in/jasonherngwang/',
     email: 'jasonherngwang@gmail.com',
   },
   {
