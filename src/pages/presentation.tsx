@@ -9,13 +9,19 @@ export default function Presentation() {
       description="Live Presentation of the Seamless CI/CD Project"
     >
       <div className="mx-auto w-full max-w-4xl px-8 py-8 text-center sm:py-24">
-        <h1 className="mb-8 text-[32px] sm:text-5xl">Presentation</h1>
+        <h1 className="mb-8 text-[32px] sm:text-5xl">
+          Seamless Live Presentation
+        </h1>
         <div className="mb-10 mt-5">
           <HeaderLine center={true} />
         </div>
-        <p className="mx-auto mb-0 mt-4 max-w-prose text-lg sm:mt-8 sm:text-2xl">
-          Live presentation of the Seamless case study.
-        </p>
+        <iframe
+          width="650"
+          height="400"
+          src="https://www.youtube.com/embed/L-WuIpvBv38"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        ></iframe>
       </div>
     </Layout>
   );
