@@ -42,8 +42,8 @@ export default function Team() {
         </div>
 
         <p className="mx-auto mb-0 mt-4 max-w-prose text-lg sm:mt-8 sm:text-2xl">
-          We are searching for software engineering positions. Please reach out
-          to discuss how our skills can bring value to your team.
+          We are all working in software engineering and development. Please reach out
+          to learn more about Seamless or our experience.
         </p>
         <div className="mt-0 grid grid-cols-1 sm:mt-4 sm:grid-cols-3">
           {team.map((member) => (
