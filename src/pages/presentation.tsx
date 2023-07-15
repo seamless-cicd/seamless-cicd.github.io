@@ -9,9 +9,7 @@ export default function Presentation() {
       description="Live Presentation of the Seamless CI/CD Project"
     >
       <div className="mx-auto w-full max-w-4xl px-8 py-8 text-center sm:py-24">
-        <h1 className="mb-8 text-[32px] sm:text-5xl">
-          Seamless Live Presentation
-        </h1>
+        <h1 className="mb-8 text-[32px] sm:text-5xl">Seamless Presentation</h1>
         <div className="mb-10 mt-5">
           <HeaderLine center={true} />
         </div>

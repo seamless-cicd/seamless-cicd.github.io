@@ -6,7 +6,7 @@ const team = [
   {
     name: 'Ethan Weiner',
     image: 'ethan.png',
-    website: 'https://github.com/ethanjweiner',
+    website: 'https://www.ejweiner.com/',
     github: 'https://github.com/ethanjweiner',
     linkedin: 'https://www.linkedin.com/in/ethan-weiner/',
     email: 'dev@ejweiner.com',
@@ -42,8 +42,7 @@ export default function Team() {
         </div>
 
         <p className="mx-auto mb-0 mt-4 max-w-prose text-lg sm:mt-8 sm:text-2xl">
-          We are all working in software engineering and development. Please reach out
-          to learn more about Seamless or our experience.
+          Feel free to reach out to chat about Seamless!
         </p>
         <div className="mt-0 grid grid-cols-1 sm:mt-4 sm:grid-cols-3">
           {team.map((member) => (
