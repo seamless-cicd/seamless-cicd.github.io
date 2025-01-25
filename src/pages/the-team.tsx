@@ -22,10 +22,10 @@ const team = [
   {
     name: 'Ryan DeJonghe',
     image: 'ryan.png',
-    website: 'https://www.rdejonghe.com/',
+    website: 'https://rdejonghe.github.io/',
     github: 'https://github.com/RDeJonghe',
     linkedin: 'https://www.linkedin.com/in/ryan-dejonghe-50a822272/',
-    email: 'ryandej@proton.me',
+    email: 'rdejonghe@hotmail.com',
   },
 ];
 
